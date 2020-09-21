@@ -1,3 +1,7 @@
+before_script:
+- export GRADLE_USER_HOME=TakamiApp/.gradle
+
+
 build:
   script:
     - ./gradlew assemble
