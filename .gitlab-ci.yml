@@ -20,8 +20,7 @@ build:
     key: "$CI_COMMIT_REF_NAME"
     policy: push
     paths:
-      - build
-      - .gradle
+      - ./gradlew 
 
 test:
   stage: test
@@ -31,4 +30,4 @@ test:
     policy: pull
     paths:
       - build
-      - .gradle
+      - ./gradlew 
