@@ -11,7 +11,8 @@ image: gradle:alpine
 variables:
   GRADLE_OPTS: "-Dorg.gradle.daemon=false"
 
-
+before_script:
+  - export GRADLE_USER_HOME=`pwd`/.gradle
 
 build:
   stage: build
@@ -20,7 +21,8 @@ build:
     key: "$CI_COMMIT_REF_NAME"
     policy: push
     paths:
-      - ./gradlew 
+      - build
+      - .gradle
 
 test:
   stage: test
@@ -30,4 +32,4 @@ test:
     policy: pull
     paths:
       - build
-      - ./gradlew 
+      - .gradle
