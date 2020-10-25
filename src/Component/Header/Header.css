@@ -1,0 +1,25 @@
+.bg-dark{
+    background-color: #0074E1 !important;
+}
+
+.btn-outline-info {
+    color: #0074E1;
+    border-color: #0074E1;
+    background-color: #1B9CE5;
+}
+
+.btn-outline-info:hover {
+    color: #0074E1;
+    border-color: #0074E1;
+    background-color: #F79E02;
+}
+
+.btn {
+
+    font-weight: bold;
+}
+.btn-outline-info:not(:disabled):not(.disabled).active, .btn-outline-info:not(:disabled):not(.disabled):active, .show>.btn-outline-info.dropdown-toggle {
+    color: #fff;
+    background-color: #10E7DC;
+    border-color: #10E7DC;
+}

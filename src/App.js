@@ -1,12 +1,15 @@
 import React from 'react';
-
 import './App.css';
-import ProductComponent from './Component/ProductComponent'
+import ProductListComponent from './Component/ProductListComponent/ProductComponent'
+import Header from './Component/Header/Header'
 
 function App() {
   return (
-  
-    <ProductComponent />
+    
+    <div>
+    <Header />
+     <ProductListComponent />
+     </div>
   
   );
 }
