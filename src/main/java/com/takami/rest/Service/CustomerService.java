@@ -1,11 +1,12 @@
 package com.takami.rest.Service;
 
 import com.takami.rest.model.Customer;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
 public interface CustomerService {
-     Customer findCustomerById(Long id);
-     List<Customer> findAllCustomers();
+   // Customer login(String username, String password);
+
 
 }

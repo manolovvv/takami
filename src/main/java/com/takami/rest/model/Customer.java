@@ -10,16 +10,21 @@ import javax.persistence.Id;
 
 @Data
 @Entity
-public class Customer {
+public class Customer extends User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     private String firstName;
     private String familyName;
     private String address;
-    private String username;
-    private String password;
 
 
+    protected Customer(String username, String password, String firstName, String familyName, String address) {
+        super(username, password);
+        this.firstName = firstName;
+        this.familyName = familyName;
+        this.address = address;
+    }
+
+    public Customer() {
+        super();
+    }
 }

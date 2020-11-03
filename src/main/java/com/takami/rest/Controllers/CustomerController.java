@@ -3,6 +3,7 @@ package com.takami.rest.Controllers;
 import com.takami.rest.Service.CustomerService;
 import com.takami.rest.model.Customer;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,10 +19,10 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
-    @GetMapping()
-    public List<Customer> getAllCustomers(){
-        return customerService.findAllCustomers();
-    }
+  //  @GetMapping("/{username}/{password}")
+ //   public Customer login(@PathVariable("username") String username, @PathVariable("password") String password){
+  //      return customerService.login(username, password);
+  //  }
 
 
 }

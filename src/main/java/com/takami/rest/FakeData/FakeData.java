@@ -1,9 +1,11 @@
 package com.takami.rest.FakeData;
 
 import com.takami.rest.model.Customer;
-import com.takami.rest.model.Product;
+import com.takami.rest.model.Reel;
+import com.takami.rest.model.Rod;
 import com.takami.rest.repositories.CustomerRepository;
-import com.takami.rest.repositories.ProductRepository;
+import com.takami.rest.repositories.ReelRepository;
+import com.takami.rest.repositories.RodRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -12,12 +14,14 @@ public class FakeData implements CommandLineRunner {
 
 
 
-    private final ProductRepository productRepository;
+    private final RodRepository rodRepository;
+    private final ReelRepository reelRepository;
     private final CustomerRepository customerRepository;
-    public FakeData(ProductRepository productRepository, CustomerRepository customerRepository) {
-        this.productRepository = productRepository;
+    public FakeData(CustomerRepository customerRepository, RodRepository rodRepository, ReelRepository reelRepository) {
+        this.rodRepository = rodRepository;
         this.customerRepository = customerRepository;
 
+        this.reelRepository = reelRepository;
     }
 
     @Override
@@ -25,43 +29,27 @@ public class FakeData implements CommandLineRunner {
 
         System.out.println("Products loading");
 
-        Product p1 = new Product();
-        p1.setName("rod");
-        p1.setPrice(40);
-        p1.setQuantity(16);
-        productRepository.save(p1);
 
-        Product p2 = new Product();
-        p2.setName("line");
-        p2.setPrice(3.79);
-        p2.setQuantity(80);
-        productRepository.save(p2);
+        Rod rod = new Rod();
+        rod.setAmount(3);
+        rod.setName("rod");
+        rod.setPathToImage("sadas");
+        rod.setPrice(123);
+        rodRepository.save(rod);
 
-        Product p3 = new Product();
-        p3.setName("hook");
-        p3.setPrice(1.67);
-        p3.setQuantity(12);
-        productRepository.save(p3);
+        Reel reel = new Reel();
+        reel.setName("reel");
+        reel.setAmount(12);
+        reel.setPrice(13);
+        reel.setWeight(135);
+        reel.setDrag(31);
+        reel.setPathToImage("dasdas");
+        reelRepository.save(reel);
 
-        Customer c1 = new Customer();
-        c1.setFirstName("Moni");
-        c1.setFamilyName("Manolov");
-        c1.setAddress("Eindhoven");
-        c1.setUsername("manolov");
-        c1.setPassword("manolov123");
-        customerRepository.save(c1);
-
-        Customer c2 = new Customer();
-        c2.setFirstName("Gosho");
-        c2.setFamilyName("Goshov");
-        c2.setAddress("Tilburg");
-        c2.setUsername("go6o");
-        c2.setPassword("go60");
-        customerRepository.save(c2);
-
-
-
-
+        Customer customer = new Customer();
+        customer.setUsername("asd");
+        customer.setPassword("asd");
+        customerRepository.save(customer);
 
         System.out.println("Products loaded succsesfully");
     }
