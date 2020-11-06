@@ -5,6 +5,7 @@ import com.takami.rest.model.Product;
 import com.takami.rest.model.Reel;
 import com.takami.rest.model.Rod;
 import com.takami.rest.repositories.HookRepository;
+import com.takami.rest.repositories.ProductRepository;
 import com.takami.rest.repositories.ReelRepository;
 import com.takami.rest.repositories.RodRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,17 +20,22 @@ import java.util.Optional;
 @Service
 public class ProductServiceImpl implements ProductService {
     @Autowired
-    public ProductServiceImpl(HookRepository hookRepository, ReelRepository reelRepository, RodRepository rodRepository) {
+    public ProductServiceImpl(HookRepository hookRepository, ReelRepository reelRepository, RodRepository rodRepository, ProductRepository productRepository) {
         this.hookRepository = hookRepository;
         this.reelRepository = reelRepository;
         this.rodRepository = rodRepository;
+       // this.productRepository = productRepository;
     }
 
 
+    @Autowired
     public final HookRepository hookRepository;
-
+    @Autowired
     public final ReelRepository reelRepository;
+    @Autowired
     public final RodRepository rodRepository;
+    //@Autowired
+    //ProductRepository productRepository;
 
     public List<Product> findAllProducts(){
         List<Hook> hooks = hookRepository.findAll();
@@ -104,6 +110,15 @@ public class ProductServiceImpl implements ProductService {
 
     }
 
+  /*  @Override
+    public Product returnProduct(Long id) {
 
+        return productRepository.findById(id).get();
+    }*/
 
+   /* @Override
+    public Product addProduct(Product product) {
+        productRepository.save(product);
+        return product;
+    }*/
 }

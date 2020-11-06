@@ -1,20 +1,14 @@
 package com.takami.rest.Controllers;
 
-import com.takami.rest.Service.HookService;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.takami.rest.Service.ProductService;
-import com.takami.rest.Service.ReelService;
-import com.takami.rest.Service.RodService;
 import com.takami.rest.model.Hook;
 import com.takami.rest.model.Product;
 import com.takami.rest.model.Reel;
 import com.takami.rest.model.Rod;
-import com.takami.rest.repositories.HookRepository;
-import com.takami.rest.repositories.ReelRepository;
-import com.takami.rest.repositories.RodRepository;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,6 +20,7 @@ import java.util.*;
 public class ProductController {
 
     public static final String BASE_URL = "/products";
+    @Autowired
     private final ProductService productService;
 
     @Autowired
@@ -42,13 +37,13 @@ public class ProductController {
         return new ResponseEntity<List<Product>>(products, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
+    /*@GetMapping("/{id}")
     public @ResponseBody ResponseEntity<Product> getProductById(@PathVariable("id") Long id)
     {
 
         Product p = productService.findProductById(id);
         return new ResponseEntity<Product>(p, HttpStatus.OK);
-    }
+    }*/
     @PostMapping("/addReel")
     public @ResponseBody ResponseEntity<Reel> addNewReel(@RequestBody Reel reel)
     {
@@ -80,6 +75,33 @@ public class ProductController {
         return (Rod)product;
     }
 
+    /*@GetMapping("/{id}")
+    public @ResponseBody ResponseEntity<Product> getProductById(@PathVariable("id") Long id){
+        Product p = productService.returnProduct(id);
+        return new ResponseEntity<Product>(p, HttpStatus.OK);
+    }*/
+
+    /*@PostMapping("/addproduct")
+    public Product addNewProduct(@RequestBody Object product) throws Exception{
 
 
-}
+            ObjectMapper mapper = new ObjectMapper();
+
+            String p = mapper.writeValueAsString(product);
+            Rod rod = mapper.reader().forType(Rod.class).readValue(p);
+            return rod;
+
+
+        }
+
+     */
+
+
+    }
+
+
+
+
+
+
+

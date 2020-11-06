@@ -1,8 +1,10 @@
 package com.takami.rest.model;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "hook")
 public class Hook extends Product {
     private int size;
     private int pieces;

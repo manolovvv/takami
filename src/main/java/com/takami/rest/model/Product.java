@@ -2,12 +2,15 @@ package com.takami.rest.model;
 
 import com.sun.istack.NotNull;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
+import java.util.Set;
 
 
-@MappedSuperclass
-public abstract class  Product {
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,6 +21,8 @@ protected Long id;
     protected double price;
 protected String name;
 protected String pathToImage;
+
+
 
     protected Product(int amount, double price, String name, String pathToImage) {
 

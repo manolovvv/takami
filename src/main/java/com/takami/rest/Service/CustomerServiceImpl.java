@@ -2,6 +2,7 @@ package com.takami.rest.Service;
 
 import com.takami.rest.model.Customer;
 import com.takami.rest.repositories.CustomerRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
@@ -16,12 +17,19 @@ public class CustomerServiceImpl implements CustomerService {
         this.customerRepository = customerRepository;
     }
 
+    @Autowired
     public final CustomerRepository customerRepository;
 
-   // @Override
-    //public Customer login(String username, String password) {
-   //     return null;
-    //}
+  /*  @Override
+    public Customer getCustomer(Long id) {
+         return customerRepository.getOne(id);
+    }
+
+*/
+    /* @Override
+    public Customer login(String username, String password) {
+       return customerRepository.login(username, password);
+    }*/
 
 
 

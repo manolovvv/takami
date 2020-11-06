@@ -1,8 +1,10 @@
 package com.takami.rest.model;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "reel")
 public class Reel extends Product{
 
     private int drag;

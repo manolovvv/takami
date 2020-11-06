@@ -2,29 +2,65 @@ package com.takami.rest.model;
 
 
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
 
-@Data
 @Entity
+@Table(name = "customer")
 public class Customer extends User {
 
     private String firstName;
     private String familyName;
-    private String address;
+
+    public List<Request> getRequests() {
+        return requests;
+    }
+
+    public void setRequests(List<Request> requests) {
+        this.requests = requests;
+    }
+
+    @OneToMany
+            (
+                    mappedBy = "customer",
+                    cascade = CascadeType.REMOVE,
+                    orphanRemoval = true,
+                    fetch = FetchType.EAGER
+            )
+    private List<Request> requests;
 
 
-    protected Customer(String username, String password, String firstName, String familyName, String address) {
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getFamilyName() {
+        return familyName;
+    }
+
+    public void setFamilyName(String familyName) {
+        this.familyName = familyName;
+    }
+
+
+
+    public Customer(String username, String password, String firstName, String familyName) {
         super(username, password);
         this.firstName = firstName;
         this.familyName = familyName;
-        this.address = address;
+
     }
 
-    public Customer() {
-        super();
+    public Customer(){
+
     }
+
+
 }

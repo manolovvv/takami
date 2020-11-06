@@ -15,6 +15,8 @@ public interface ProductService {
     Rod addNewRod(Rod rod);
     Hook addNewHook(Hook hook);
     boolean deleteProduct(Long id);
+   // Product returnProduct(Long id);
+  //  Product addProduct(Product product);
 
 
 

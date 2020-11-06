@@ -1,27 +1,43 @@
 package com.takami.rest.FakeData;
 
-import com.takami.rest.model.Customer;
-import com.takami.rest.model.Reel;
-import com.takami.rest.model.Rod;
-import com.takami.rest.repositories.CustomerRepository;
-import com.takami.rest.repositories.ReelRepository;
-import com.takami.rest.repositories.RodRepository;
+import com.takami.rest.model.*;
+import com.takami.rest.repositories.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class FakeData implements CommandLineRunner {
 
 
-
+    @Autowired
     private final RodRepository rodRepository;
+
+    @Autowired
     private final ReelRepository reelRepository;
+
+   @Autowired
+    private final OrderItemRepository orderItemRepository;
+
+    @Autowired
     private final CustomerRepository customerRepository;
-    public FakeData(CustomerRepository customerRepository, RodRepository rodRepository, ReelRepository reelRepository) {
+
+    @Autowired
+    private final RequestRepository requestRepository;
+
+
+    public FakeData(CustomerRepository customerRepository, RodRepository rodRepository, ReelRepository reelRepository,/*, OrderItemRepository orderItemRepository*/OrderItemRepository orderItemRepository, RequestRepository requestRepository) {
+
         this.rodRepository = rodRepository;
         this.customerRepository = customerRepository;
 
         this.reelRepository = reelRepository;
+       // this.orderItemRepository = orderItemRepository;
+        this.orderItemRepository = orderItemRepository;
+        this.requestRepository = requestRepository;
     }
 
     @Override
@@ -39,6 +55,50 @@ public class FakeData implements CommandLineRunner {
 
         Reel reel = new Reel();
         reel.setName("reel");
+        reel.setAmount(3);
+        reel.setDrag(30);
+        reel.setWeight(550);
+        reel.setPrice(40);
+        reelRepository.save(reel);
+
+        OrderItem orderItem = new OrderItem();
+        orderItem.setQuantity(3);
+        orderItem.setProduct(rodRepository.getOne( Long.valueOf(1)));
+        orderItemRepository.save(orderItem);
+
+        OrderItem orderItem1 = new OrderItem();
+        orderItem1.setQuantity(3);
+        orderItem1.setProduct(reelRepository.getOne(Long.valueOf(2)));
+        orderItemRepository.save(orderItem1);
+
+        Request request = new Request();
+        List<OrderItem> orderItemsRequest1 = new ArrayList<OrderItem>();
+        orderItemsRequest1.add(orderItem);
+        orderItemsRequest1.add(orderItem1);
+        request.setOrderItem(orderItemsRequest1);
+        requestRepository.save(request);
+
+        Customer customer = new Customer();
+        customer.setUsername("gosho");
+        customer.setPassword("gosho123");
+        customer.setFamilyName("Petkov");
+        customer.setFirstName("Georgi");
+        List<Request> request1 = new ArrayList<Request>();
+        customer.setRequests(request1);
+        customerRepository.save(customer);
+
+        request.setCustomer(customer);
+        requestRepository.save(request);
+
+        orderItem.setRequest(request);
+        orderItem1.setRequest(request);
+        orderItemRepository.save(orderItem);
+        orderItemRepository.save(orderItem1);
+
+
+
+        /*Reel reel = new Reel();
+        reel.setName("reel");
         reel.setAmount(12);
         reel.setPrice(13);
         reel.setWeight(135);
@@ -50,6 +110,37 @@ public class FakeData implements CommandLineRunner {
         customer.setUsername("asd");
         customer.setPassword("asd");
         customerRepository.save(customer);
+
+        Order order1 = new Order();
+        order1.setCustomer(customer);
+
+        OrderItem orderItem = new OrderItem();
+        orderItem.setQuantity(3);
+        orderItem.setOrder(order1);
+        orderItem.setOrder(order1);
+        orderItem.setProduct(reel);
+        orderItemRepository.save(orderItem);
+
+
+        Customer customer2 = new Customer();
+        customer2.setUsername("dsa");
+        customer2.setPassword("das");
+        customerRepository.save(customer2);
+
+        Order order2 = new Order();
+        order2.setCustomer(customer2);
+
+        OrderItem orderItem2 = new OrderItem();
+        orderItem2.setQuantity(4);
+        orderItem2.setProduct(rod);
+        orderItem2.setOrder(order2);
+        orderItemRepository.save(orderItem2);
+
+        OrderItem orderItem3 = new OrderItem();
+        orderItem3.setProduct(reel);
+        orderItem3.setQuantity(5);
+        orderItem3.setOrder(order1);
+        orderItemRepository.save(orderItem3);*/
 
         System.out.println("Products loaded succsesfully");
     }

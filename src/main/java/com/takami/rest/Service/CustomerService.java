@@ -8,5 +8,8 @@ import java.util.List;
 public interface CustomerService {
    // Customer login(String username, String password);
 
+    //Customer getCustomer(Long id);
+    //Customer login(String username, String password);
+
 
 }
