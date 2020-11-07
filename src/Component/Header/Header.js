@@ -15,7 +15,7 @@ class Header extends Component {
             <Image src="../../assets/Logo.png" fluid />
             <Nav className="mr-auto">
               <Nav.Link href="#home">Home</Nav.Link>
-              <Nav.Link href="#aboutme">About us</Nav.Link>
+              <Nav.Link href="#aboutme">About me</Nav.Link>
               <Nav.Link href="#contactme">Contact me</Nav.Link>
             </Nav>
             <Form inline>
