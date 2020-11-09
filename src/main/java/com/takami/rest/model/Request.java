@@ -9,7 +9,7 @@ public class Request {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+   @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
@@ -18,7 +18,7 @@ public class Request {
             mappedBy = "request",
             cascade = CascadeType.REMOVE,
             orphanRemoval = true,
-            fetch = FetchType.EAGER
+            fetch = FetchType.LAZY
     )
     private List<OrderItem> orderItem;
 

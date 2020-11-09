@@ -1,6 +1,7 @@
 package com.takami.rest.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -9,19 +10,10 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "customer")
 public class Customer extends User {
 
     private String firstName;
     private String familyName;
-
-    public List<Request> getRequests() {
-        return requests;
-    }
-
-    public void setRequests(List<Request> requests) {
-        this.requests = requests;
-    }
 
     @OneToMany
             (
@@ -30,8 +22,23 @@ public class Customer extends User {
                     orphanRemoval = true,
                     fetch = FetchType.EAGER
             )
+    @JsonIgnore
     private List<Request> requests;
 
+    public Customer(String username, String password, String firstName, String familyName) {
+        super(username, password);
+        this.firstName = firstName;
+        this.familyName = familyName;
+
+    }
+
+    public Customer(){
+
+    }
+
+    public Customer(String username,String password){
+        super(username,password);
+    }
 
     public String getFirstName() {
         return firstName;
@@ -49,18 +56,16 @@ public class Customer extends User {
         this.familyName = familyName;
     }
 
-
-
-    public Customer(String username, String password, String firstName, String familyName) {
-        super(username, password);
-        this.firstName = firstName;
-        this.familyName = familyName;
-
+   public List<Request> getRequests() {
+        return requests;
     }
 
-    public Customer(){
-
+    public void setRequests(List<Request> requests) {
+        this.requests = requests;
     }
+
+
+
 
 
 }

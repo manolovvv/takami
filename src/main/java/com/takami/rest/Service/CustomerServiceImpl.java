@@ -26,10 +26,10 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
 */
-    /* @Override
-    public Customer login(String username, String password) {
+     @Override
+    public Long login(String username, String password) {
        return customerRepository.login(username, password);
-    }*/
+    }
 
 
 

@@ -11,7 +11,7 @@ import javax.transaction.Transactional;
 
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer,Long> {
-    //@Query("SELECT Customer FROM Customer customer WHERE  customer.username = ?1 and customer.password = ?2")
-    //Customer login(String username, String password);
+    @Query("SELECT customer.id FROM Customer customer WHERE  customer.username = ?1 and customer.password = ?2")
+    Long login(String username, String password);
 
 }

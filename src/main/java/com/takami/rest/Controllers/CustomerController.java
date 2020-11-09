@@ -4,13 +4,11 @@ import com.takami.rest.Service.CustomerService;
 import com.takami.rest.model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping(CustomerController.BASE_URL)
 public class CustomerController {
@@ -22,10 +20,17 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
-   /* @GetMapping("/{username}/{password}")
-    public Customer getOrderItems(@PathVariable("username") String username, @PathVariable("password") String password){
-        return customerService.login(username,password);
-    }*/
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/login")
+    public Long getOrderItems(@RequestParam(name = "username") String username, @RequestParam(name = "password") String password){
+       Customer customer = new Customer();
+       customer.setUsername(username);
+       customer.setPassword(password);
+      //  return c.getUsername();
+       return customerService.login(customer.getUsername(),customer.getPassword());
+    }
+
+
 
   //  @GetMapping("/{username}/{password}")
  //   public Customer login(@PathVariable("username") String username, @PathVariable("password") String password){

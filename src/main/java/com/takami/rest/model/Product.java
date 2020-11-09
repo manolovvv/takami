@@ -17,7 +17,6 @@ public abstract class Product {
 protected Long id;
 
     protected int amount;
-
     protected double price;
 protected String name;
 protected String pathToImage;

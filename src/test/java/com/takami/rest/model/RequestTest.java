@@ -20,7 +20,7 @@ class RequestTest {
         orderItemList.add(orderItem);
         Request request = new Request( customer,orderItemList);
         assertEquals(request.getCustomer().getId(), new Long(2));
-        assertEquals(request.getOrderItem().get(0).getId(), new Long(1));
+       assertEquals(request.getOrderItem().get(0).getId(), new Long(1));
     }
 
 

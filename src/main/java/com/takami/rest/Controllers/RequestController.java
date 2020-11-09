@@ -26,11 +26,9 @@ public class RequestController {
     }
 
     @GetMapping("/{id}")
-    public String getRequest(@PathVariable("id") Long id) {
-        try {
-          return   requestService.getRequestById(id);
-        } catch (Exception ex) {
-            return ex.toString();
-        }
+    public Customer getRequest(@PathVariable("id") Long id) {
+
+          return requestService.getRequestById(id);
+
     }
 }

@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface CustomerService {
-   // Customer login(String username, String password);
+    Long login(String username, String password);
 
     //Customer getCustomer(Long id);
     //Customer login(String username, String password);
