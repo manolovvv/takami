@@ -2,6 +2,7 @@ package com.takami.rest.Controllers;
 
 import com.takami.rest.Service.CustomerService;
 import com.takami.rest.model.Customer;
+import com.takami.rest.model.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +30,10 @@ public class CustomerController {
       //  return c.getUsername();
        return customerService.login(customer.getUsername(),customer.getPassword());
     }
+
+
+
+
 
 
 

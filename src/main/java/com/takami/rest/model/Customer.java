@@ -1,7 +1,10 @@
 package com.takami.rest.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -15,6 +18,7 @@ public class Customer extends User {
     private String firstName;
     private String familyName;
 
+
     @OneToMany
             (
                     mappedBy = "customer",
@@ -22,7 +26,7 @@ public class Customer extends User {
                     orphanRemoval = true,
                     fetch = FetchType.EAGER
             )
-    @JsonIgnore
+    @JsonIgnoreProperties("requests")
     private List<Request> requests;
 
     public Customer(String username, String password, String firstName, String familyName) {

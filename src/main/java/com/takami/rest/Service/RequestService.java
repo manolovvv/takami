@@ -7,5 +7,7 @@ import com.takami.rest.model.Request;
 import java.util.List;
 
 public interface RequestService {
-    Customer getRequestById(Long id);
+    Request getRequestById(Long id);
+    List<Request> getAllRequests();
+    List<Request> getAllRequestsByCustomerId(Long id);
 }

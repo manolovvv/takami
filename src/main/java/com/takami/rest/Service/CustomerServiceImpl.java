@@ -1,25 +1,27 @@
 package com.takami.rest.Service;
 
-import com.takami.rest.model.Customer;
+import com.takami.rest.model.Request;
 import com.takami.rest.repositories.CustomerRepository;
+import com.takami.rest.repositories.RequestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceUnit;
 import java.util.List;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
 
-    public CustomerServiceImpl(CustomerRepository customerRepository) {
+    public CustomerServiceImpl(CustomerRepository customerRepository, RequestRepository requestRepository) {
         this.customerRepository = customerRepository;
+        this.requestRepository = requestRepository;
     }
 
     @Autowired
     public final CustomerRepository customerRepository;
 
+    @Autowired
+    public final RequestRepository requestRepository;
   /*  @Override
     public Customer getCustomer(Long id) {
          return customerRepository.getOne(id);
@@ -30,6 +32,8 @@ public class CustomerServiceImpl implements CustomerService {
     public Long login(String username, String password) {
        return customerRepository.login(username, password);
     }
+
+
 
 
 
