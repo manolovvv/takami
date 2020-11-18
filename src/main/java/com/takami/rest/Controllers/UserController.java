@@ -1,6 +1,7 @@
 package com.takami.rest.Controllers;
 
 
+import com.takami.rest.Exceptions.EmailExistException;
 import com.takami.rest.Service.UserService;
 import com.takami.rest.model.Customer;
 import org.springframework.web.bind.annotation.*;
@@ -15,14 +16,20 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/login")
-    public Long login(@RequestParam(name = "username") String username, @RequestParam(name = "password") String password){
-        return userService.login(username,password);
+    @PostMapping("/login")
+    public Long login(@RequestBody Customer customer){
+        return userService.login(customer.getEmail(),customer.getPassword());
     }
 
-    @PostMapping("/register")
-    public String register(@RequestBody Customer customer){
-        return userService.register(customer);
+
+
+    @PostMapping("/registerCustomer")
+    public String register(@RequestBody Customer customer) throws EmailExistException {
+        try{
+        return userService.registerCustomer(customer);}
+        catch (Exception ex){
+            return ex.toString();
+        }
     }
 
 }

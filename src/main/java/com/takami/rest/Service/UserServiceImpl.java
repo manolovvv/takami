@@ -1,6 +1,8 @@
 package com.takami.rest.Service;
 
+import com.takami.rest.Exceptions.EmailExistException;
 import com.takami.rest.model.Customer;
+import com.takami.rest.model.User;
 import com.takami.rest.repositories.CustomerRepository;
 import com.takami.rest.repositories.UserRepository;
 import org.springframework.stereotype.Service;
@@ -17,19 +19,25 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Long login(String username,String password) {
-        Customer c =  customerRepository.getCustomerByUsernameAndPassword(username,password);
-        return c.getId();
+    public Long login(String email,String password) {
+        User user =  userRepository.getUserByEmailAndPassword(email,password);
+        return user.getId();
     }
 
     @Override
-    public String register(Customer customer) {
-        try {
-            customerRepository.save(customer);
-            return customerRepository.login(customer.getUsername(), customer.getPassword()).toString();
-        }
-        catch(Exception ex){
-            return ex.toString();
-        }
+    public String registerCustomer(Customer customer) throws EmailExistException {
+
+            if(userRepository.existsUserByEmail(customer.getEmail())){
+                throw new EmailExistException("User with "+ customer.getEmail()+" already exists");
+            }
+            else{
+                customerRepository.save(customer);
+                return "Saved succsessfully";
+            }
+
+
+
+
+
     }
 }
