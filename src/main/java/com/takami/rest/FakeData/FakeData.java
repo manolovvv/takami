@@ -87,7 +87,7 @@ public class FakeData implements CommandLineRunner {
         customer.setRequests(request1);
         customerRepository.save(customer);
 
-        request.setCustomer(customer);
+       // request.setCustomer(customer);
         requestRepository.save(request);
 
         request1.add(request);

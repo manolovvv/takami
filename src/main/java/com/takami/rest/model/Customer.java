@@ -1,5 +1,6 @@
 package com.takami.rest.model;
 
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -19,13 +20,11 @@ public class Customer extends User {
 
 
     @OneToMany
-            (
-                    mappedBy = "customer",
-                    cascade = CascadeType.REMOVE,
-                    orphanRemoval = true,
-                    fetch = FetchType.EAGER
-            )
-    @JsonIgnoreProperties("requests")
+    @JoinTable(
+            name="customer_request",
+            joinColumns = @JoinColumn(name = "customer_id"),
+            inverseJoinColumns = @JoinColumn(name= "request_id")
+    )
     private List<Request> requests;
 
     public Customer(String username, String password, String firstName, String familyName) {
