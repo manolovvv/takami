@@ -26,9 +26,19 @@ public class RequestController {
     }
 
     @GetMapping("/{id}")
-    public Customer getRequest(@PathVariable("id") Long id) {
+    public  Request getRequest(@PathVariable("id") Long id) {
 
           return requestService.getRequestById(id);
 
+    }
+
+    @GetMapping
+    public List<Request> getAllRequests(){
+        return requestService.getAllRequests();
+    }
+
+    @GetMapping("/getaallbycustomerid/{id}")
+    public List<Request> getRequestsByCustomerId(@PathVariable Long id){
+        return requestService.getAllRequestsByCustomerId(id);
     }
 }

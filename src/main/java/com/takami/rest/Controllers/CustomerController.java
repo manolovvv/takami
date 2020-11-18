@@ -2,6 +2,7 @@ package com.takami.rest.Controllers;
 
 import com.takami.rest.Service.CustomerService;
 import com.takami.rest.model.Customer;
+import com.takami.rest.model.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
@@ -20,15 +21,19 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("/login")
-    public Long getOrderItems(@RequestParam(name = "username") String username, @RequestParam(name = "password") String password){
+   // @CrossOrigin(origins = "http://localhost:3000")
+   /* @GetMapping("/login")
+    public Long getOrderItems(@RequestParam(name = "email") String email, @RequestParam(name = "password") String password){
        Customer customer = new Customer();
-       customer.setUsername(username);
+       customer.getEmail(email);
        customer.setPassword(password);
       //  return c.getUsername();
-       return customerService.login(customer.getUsername(),customer.getPassword());
-    }
+       return customerService.login(customer.getEmail(),customer.getPassword());
+    }*/
+
+
+
+
 
 
 

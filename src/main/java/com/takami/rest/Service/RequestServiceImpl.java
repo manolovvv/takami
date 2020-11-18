@@ -32,12 +32,19 @@ public class RequestServiceImpl implements RequestService {
     }
 
     @Override
-    public Customer getRequestById(Long id) {
+    public Request getRequestById(Long id) {
 
         try {
             Request request = new Request();
-            Customer c = requestRepository.getOne(id).getCustomer();
-            return c;
+            Long newId  = requestRepository.getOne(id).getId();
+            request.setId(newId);
+            //Customer c = requestRepository.getOne(id).getCustomer();
+          //  request.setCustomer(c);
+            List<OrderItem> orderItems = requestRepository.getOne(id).getOrderItem();
+            request.setOrderItem(orderItems);
+
+
+            return request;
 
 
           //  return .toString();
@@ -50,5 +57,20 @@ public class RequestServiceImpl implements RequestService {
 
 
 
+
+
     }
+
+    @Override
+    public List<Request> getAllRequests() {
+        return requestRepository.findAll();
+    }
+
+    @Override
+    public List<Request> getAllRequestsByCustomerId(Long id) {
+       // return requestRepository.readRequestsByCustomer_Id(id);
+        return customerRepository.getOne(id).getRequests();
+    }
+
+
 }

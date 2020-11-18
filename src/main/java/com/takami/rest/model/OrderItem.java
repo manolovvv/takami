@@ -1,6 +1,7 @@
 package com.takami.rest.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
@@ -20,6 +21,7 @@ public class OrderItem {
 
     @ManyToOne
     @JoinColumn(name = "product_id")
+
     Product product;
 
     int quantity;

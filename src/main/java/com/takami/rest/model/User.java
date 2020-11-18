@@ -12,11 +12,12 @@ public abstract class User {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     protected Long id;
-    protected String username;
     protected String password;
+    protected String email;
+    protected String address;
 
-    protected User(String username, String password){
-        this.username = username;
+    protected User(String email, String password){
+        this.email = email;
         this.password = password;
     }
     protected User(){
@@ -31,13 +32,6 @@ public abstract class User {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
 
     public String getPassword() {
         return password;
@@ -45,5 +39,21 @@ public abstract class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }
