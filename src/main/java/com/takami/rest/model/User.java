@@ -3,25 +3,53 @@ package com.takami.rest.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public abstract class User {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
-    protected Long id;
-    protected String password;
-    protected String email;
-    protected String address;
+    private Long id;
+    private String username;
+    private String password;
 
-    protected User(String email, String password){
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    private String role;
+    private String email;
+    private String address;
+    private String firstName;
+    private String familyName;
+
+
+    @OneToMany
+    @JoinTable(
+            name="user_request",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name= "request_id")
+    )
+    private List<Request> requests;
+
+    private User(String email, String password){
         this.email = email;
         this.password = password;
     }
-    protected User(){
+    public User(){
 
+    }
+
+    public User(String username, String password, String role){
+        this.username = username;
+        this.password = password;
+        this.role = role;
     }
 
     public Long getId() {
@@ -55,5 +83,37 @@ public abstract class User {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getFamilyName() {
+        return familyName;
+    }
+
+    public void setFamilyName(String familyName) {
+        this.familyName = familyName;
+    }
+
+    public List<Request> getRequests() {
+        return requests;
+    }
+
+    public void setRequests(List<Request> requests) {
+        this.requests = requests;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

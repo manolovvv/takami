@@ -1,16 +1,11 @@
 package com.takami.rest.model;
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.Data;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 public class Customer extends User {
@@ -27,8 +22,8 @@ public class Customer extends User {
     )
     private List<Request> requests;
 
-    public Customer(String username, String password, String firstName, String familyName) {
-        super(username, password);
+    public Customer(String username, String password,String email, String firstName, String familyName) {
+        super(email,password,username);
         this.firstName = firstName;
         this.familyName = familyName;
 
@@ -38,8 +33,8 @@ public class Customer extends User {
 
     }
 
-    public Customer(String username,String password){
-        super(username,password);
+    public Customer(String username,String password,String email){
+        super(email,password,username);
     }
 
     public String getFirstName() {

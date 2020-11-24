@@ -1,13 +1,11 @@
 package com.takami.rest.Service;
 
 
-import com.takami.rest.model.Customer;
 import com.takami.rest.model.OrderItem;
 import com.takami.rest.model.Request;
-import com.takami.rest.repositories.CustomerRepository;
 import com.takami.rest.repositories.ProductRepository;
 import com.takami.rest.repositories.RequestRepository;
-import org.aspectj.weaver.ast.Or;
+import com.takami.rest.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,14 +18,14 @@ public class RequestServiceImpl implements RequestService {
    private final RequestRepository requestRepository;
 
     @Autowired
-    private final CustomerRepository customerRepository;
+    private final UserRepository userRepository;
 
     @Autowired
     private final ProductRepository productRepository;
 
-    public RequestServiceImpl(RequestRepository requestRepository, CustomerRepository customerRepository, ProductRepository productRepository) {
+    public RequestServiceImpl(RequestRepository requestRepository, UserRepository userRepository, ProductRepository productRepository) {
         this.requestRepository = requestRepository;
-        this.customerRepository = customerRepository;
+        this.userRepository = userRepository;
         this.productRepository = productRepository;
     }
 
@@ -67,9 +65,9 @@ public class RequestServiceImpl implements RequestService {
     }
 
     @Override
-    public List<Request> getAllRequestsByCustomerId(Long id) {
-       // return requestRepository.readRequestsByCustomer_Id(id);
-        return customerRepository.getOne(id).getRequests();
+    public List<Request> getAllRequestsByUserId(Long id) {
+
+        return userRepository.getOne(id).getRequests();
     }
 
 

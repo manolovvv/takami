@@ -23,16 +23,16 @@ public class FakeData implements CommandLineRunner {
     private final OrderItemRepository orderItemRepository;
 
     @Autowired
-    private final CustomerRepository customerRepository;
+    private final UserRepository userRepository;
 
     @Autowired
     private final RequestRepository requestRepository;
 
 
-    public FakeData(CustomerRepository customerRepository, RodRepository rodRepository, ReelRepository reelRepository,/*, OrderItemRepository orderItemRepository*/OrderItemRepository orderItemRepository, RequestRepository requestRepository) {
+    public FakeData(UserRepository userRepository, RodRepository rodRepository, ReelRepository reelRepository,/*, OrderItemRepository orderItemRepository*/OrderItemRepository orderItemRepository, RequestRepository requestRepository) {
 
         this.rodRepository = rodRepository;
-        this.customerRepository = customerRepository;
+        this.userRepository = userRepository;
 
         this.reelRepository = reelRepository;
        // this.orderItemRepository = orderItemRepository;
@@ -78,22 +78,23 @@ public class FakeData implements CommandLineRunner {
         request.setOrderItem(orderItemsRequest1);
         requestRepository.save(request);
 
-        Customer customer = new Customer();
-        customer.setPassword("moni123");
-        customer.setFamilyName("Manolov");
-        customer.setFirstName("Moni");
-        customer.setEmail("moni.manolov@abv.bg");
-        customer.setAddress("Eindhoven");
+        User user = new User();
+        user.setPassword("moni123");
+        user.setFamilyName("Manolov");
+        user.setFirstName("Moni");
+        user.setEmail("moni.manolov@abv.bg");
+        user.setUsername("moni");
+        user.setAddress("Eindhoven");
         List<Request> request1 = new ArrayList<Request>();
-        customer.setRequests(request1);
-        customerRepository.save(customer);
+        user.setRequests(request1);
+       userRepository.save(user);
 
        // request.setCustomer(customer);
         requestRepository.save(request);
 
         request1.add(request);
-        customer.setRequests(request1);
-        customerRepository.save(customer);
+        user.setRequests(request1);
+        userRepository.save(user);
 
         orderItem.setRequest(request);
         orderItem1.setRequest(request);
