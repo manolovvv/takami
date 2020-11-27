@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ProductService from '../../Service/ProductService'
 import {Card, Button} from 'react-bootstrap'
+import options from 'constants'
 
 class ListProductComponent extends Component {
 
@@ -12,7 +13,7 @@ class ListProductComponent extends Component {
     }
 
     componentDidMount() {
-        ProductService.getProducts().then((res) => {
+        ProductService.getProducts(options).then((res) => {
             this.setState({ products: res.data })
         })
 

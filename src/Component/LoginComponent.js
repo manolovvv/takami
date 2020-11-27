@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Form, Button } from 'react-bootstrap'
 import LoginService from '../Service/LoginService'
+import { Redirect, Route, useHistory } from 'react-router-dom'
 
 class LoginComponent extends Component {
 
@@ -24,14 +25,21 @@ class LoginComponent extends Component {
     }
 
     handleSubmit(event) {
-        
+
         const { username, password } = this.state;
-        
-        LoginService.login(username, password).then((res) => {
-           alert(res.data);
-           
+
+            LoginService.login(username, password).then((res) => {
+            console.log(res.data.jwt);
+            sessionStorage.setItem('JWTToken', res.data.jwt);
+            console.log(sessionStorage.getItem('JWTToken'));
+            sessionStorage.setItem("loggedIn", true);
         })
-        event.preventDefault();
+
+        
+
+        this.props.history.push("/products");
+        
+       
     }
 
     render() {
