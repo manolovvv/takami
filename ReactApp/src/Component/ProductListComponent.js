@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ProductService from '../Service/ProductService'
 import { Card, Button } from 'react-bootstrap'
+import {options} from '../constants/constants'
 
 class ProductListComponent extends Component {
 
@@ -12,7 +13,7 @@ class ProductListComponent extends Component {
     }
 
     componentDidMount() {
-        ProductService.getProducts().then((res) => {
+        ProductService.getProducts(options).then((res) => {
             this.setState({ products: res.data })
         })
 
@@ -52,14 +53,14 @@ class ProductListComponent extends Component {
             this.state.products.map(
                 (product, index) => {
 
-                    return     <Card style={{ width: '15rem' }}>
+                    return     <Card style={{ width: '15rem' }} key = {product.id}>
                             <Card.Img variant="top" src="holder.js/100px180" />
                             <Card.Body>
                                 <Card.Title>{product.name}</Card.Title>
                                 <Card.Text>
-                                    <p>price: {product.price}</p>
-                                    <p>quantity: {product.amount}</p>
-                                    <p>{index}</p>
+                                    price: {product.price}<br/>
+                                    quantity: {product.amount}<br/>
+                                    {index}
                                 </Card.Text>
                                 <Button variant="primary">See more details</Button>
                             </Card.Body>
