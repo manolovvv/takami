@@ -1,5 +1,7 @@
 package com.takami.rest.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
@@ -12,12 +14,14 @@ public class OrderItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
             @JoinColumn(name = "request_id")
+            @JsonIgnore
     Request request;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "product_id")
+
     Product product;
 
     int quantity;

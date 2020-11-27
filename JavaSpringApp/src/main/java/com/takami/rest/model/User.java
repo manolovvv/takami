@@ -3,23 +3,48 @@ package com.takami.rest.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public abstract class User {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
-    protected Long id;
-    protected String username;
-    protected String password;
+    private Long id;
+    private String username;
+    private String password;
 
-    protected User(String username, String password){
-        this.username = username;
+
+
+    @Enumerated(EnumType.STRING)
+    private ERole role;
+
+    private String email;
+    private String address;
+    private String firstName;
+    private String familyName;
+
+
+    @OneToMany
+    @JoinTable(
+            name="user_request",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name= "request_id")
+    )
+    private List<Request> requests;
+
+    private User(String email, String password){
+        this.email = email;
         this.password = password;
     }
-    protected User(){
+    public User(){
+
+    }
+
+    public User(String username, String password, String role){
+        this.username = username;
+        this.password = password;
 
     }
 
@@ -31,6 +56,55 @@ public abstract class User {
         this.id = id;
     }
 
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getFamilyName() {
+        return familyName;
+    }
+
+    public void setFamilyName(String familyName) {
+        this.familyName = familyName;
+    }
+
+    public List<Request> getRequests() {
+        return requests;
+    }
+
+    public void setRequests(List<Request> requests) {
+        this.requests = requests;
+    }
+
     public String getUsername() {
         return username;
     }
@@ -39,11 +113,12 @@ public abstract class User {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
+
+    public ERole getRole() {
+        return role;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setRole(ERole role) {
+        this.role = role;
     }
 }

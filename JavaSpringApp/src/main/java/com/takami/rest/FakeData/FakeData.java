@@ -4,6 +4,7 @@ import com.takami.rest.model.*;
 import com.takami.rest.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -12,6 +13,8 @@ import java.util.List;
 @Component
 public class FakeData implements CommandLineRunner {
 
+
+    PasswordEncoder passwordEncoder;
 
     @Autowired
     private final RodRepository rodRepository;
@@ -23,16 +26,16 @@ public class FakeData implements CommandLineRunner {
     private final OrderItemRepository orderItemRepository;
 
     @Autowired
-    private final CustomerRepository customerRepository;
+    private final UserRepository userRepository;
 
     @Autowired
     private final RequestRepository requestRepository;
 
 
-    public FakeData(CustomerRepository customerRepository, RodRepository rodRepository, ReelRepository reelRepository,/*, OrderItemRepository orderItemRepository*/OrderItemRepository orderItemRepository, RequestRepository requestRepository) {
+    public FakeData(UserRepository userRepository, RodRepository rodRepository, ReelRepository reelRepository,/*, OrderItemRepository orderItemRepository*/OrderItemRepository orderItemRepository, RequestRepository requestRepository) {
 
         this.rodRepository = rodRepository;
-        this.customerRepository = customerRepository;
+        this.userRepository = userRepository;
 
         this.reelRepository = reelRepository;
        // this.orderItemRepository = orderItemRepository;
@@ -78,17 +81,24 @@ public class FakeData implements CommandLineRunner {
         request.setOrderItem(orderItemsRequest1);
         requestRepository.save(request);
 
-        Customer customer = new Customer();
-        customer.setUsername("gosho");
-        customer.setPassword("gosho123");
-        customer.setFamilyName("Petkov");
-        customer.setFirstName("Georgi");
+        User user = new User();
+        user.setPassword("$2y$12$M4WhuhQfix4dHqJsiLg0eed5lkd/eHT.jVwsG06/xhNoSGM2LNeXW");
+        user.setFamilyName("Manolov");
+        user.setFirstName("Moni");
+        user.setEmail("moni.manolov@abv.bg");
+        user.setUsername("moni");
+        user.setAddress("Eindhoven");
+        user.setRole(ERole.ROLE_USER);
         List<Request> request1 = new ArrayList<Request>();
-        customer.setRequests(request1);
-        customerRepository.save(customer);
+        user.setRequests(request1);
+       userRepository.save(user);
 
-        request.setCustomer(customer);
+       // request.setCustomer(customer);
         requestRepository.save(request);
+
+        request1.add(request);
+        user.setRequests(request1);
+        userRepository.save(user);
 
         orderItem.setRequest(request);
         orderItem1.setRequest(request);

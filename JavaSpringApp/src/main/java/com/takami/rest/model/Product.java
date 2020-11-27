@@ -17,7 +17,6 @@ public abstract class Product {
 protected Long id;
 
     protected int amount;
-
     protected double price;
 protected String name;
 protected String pathToImage;
@@ -72,6 +71,16 @@ protected String pathToImage;
 
     public void setPathToImage(String pathToImage) {
         this.pathToImage = pathToImage;
+    }
+
+    public boolean buyProduct(int amount){
+        if(this.amount - amount <0){
+            return false;
+        }
+        else{
+            this.amount = this.amount - amount;
+            return true;
+        }
     }
 }
 
