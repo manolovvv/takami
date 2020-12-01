@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { Form, Button } from 'react-bootstrap'
-import LoginService from '../Service/LoginService'
-import { Redirect, Route, useHistory } from 'react-router-dom'
+import LoginService from '../Service/AuthService'
+import { Redirect, Route, useHistory,withRouter } from 'react-router-dom'
+import AuthService from '../Service/AuthService'
 
 class LoginComponent extends Component {
 
@@ -25,22 +26,23 @@ class LoginComponent extends Component {
     }
 
     handleSubmit(event) {
-
         const { username, password } = this.state;
 
-            LoginService.login(username, password).then((res) => {
-            console.log(res.data.jwt);
+            AuthService.login(username, password).then((res) => {
+            sessionStorage.clear();
+            console.log(res);
             sessionStorage.setItem('JWTToken', res.data.jwt);
             console.log(sessionStorage.getItem('JWTToken'));
             sessionStorage.setItem("loggedIn", true);
+            sessionStorage.setItem("role",res.data.role);
+            
         })
-
         
-
-        this.props.history.push("/products");
+        this.props.history.push('/products');
         
        
     }
+
 
     render() {
         return (
@@ -55,8 +57,8 @@ class LoginComponent extends Component {
                     <Form.Label>Password</Form.Label>
                     <Form.Control type="password" placeholder="Password" name="password" value={this.state.password} onChange={this.handleChange} />
                 </Form.Group>
-                <Button variant="primary" type="submit">
-                    Submit
+                <Button variant="primary" type="submit" onClick= {this.handleSubmit}>
+                    Login
   </Button>
             </Form>
 
@@ -66,4 +68,4 @@ class LoginComponent extends Component {
 
 
 }
-export default LoginComponent;
+export default withRouter(LoginComponent);

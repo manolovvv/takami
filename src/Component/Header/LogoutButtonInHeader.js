@@ -14,8 +14,7 @@ class LogoutButtonInHeader extends Component{
 
     handleClick(event){
         alert("loggedOut");
-        sessionStorage.setItem("loggedIn", false);
-        sessionStorage.setItem("JWTToken", null);
+        sessionStorage.clear();
         window.location.reload();
     }
     render() {
