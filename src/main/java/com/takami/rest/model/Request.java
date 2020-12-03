@@ -7,17 +7,19 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Request {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     //@JsonIgnore
-   //@ManyToOne
-   // @JoinColumn(name = "customer_id")
-   // private Customer customer;
+    //@ManyToOne
+    // @JoinColumn(name = "customer_id")
+    // private Customer customer;
 
 
     @OneToMany(
@@ -27,6 +29,17 @@ public class Request {
             fetch = FetchType.LAZY
     )
     private List<OrderItem> orderItem;
+
+
+
+     @ManyToOne
+     private User user;
+
+
+    public Request(User user, List<OrderItem> orderItem){
+        this.user = user;
+        this.orderItem = orderItem;
+    }
 
     public Request(/*Customer customer,*/ List<OrderItem> orderItem) {
         //this.customer = customer;
@@ -53,6 +66,14 @@ public class Request {
         this.customer = customer;
     }*/
 
+    public User getUser() {
+        return this.user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public List<OrderItem> getOrderItem() {
         return orderItem;
     }
@@ -60,5 +81,7 @@ public class Request {
     public void setOrderItem(List<OrderItem> orderItem) {
         this.orderItem = orderItem;
     }
+
+
 
 }

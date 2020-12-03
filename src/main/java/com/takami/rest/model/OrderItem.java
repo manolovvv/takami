@@ -15,8 +15,8 @@ public class OrderItem {
     private Long id;
 
     @ManyToOne
-            @JoinColumn(name = "request_id")
-            @JsonIgnore
+    @JoinColumn(name = "request_id")
+    @JsonIgnore
     Request request;
 
     @ManyToOne
@@ -71,4 +71,5 @@ public class OrderItem {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+
 }

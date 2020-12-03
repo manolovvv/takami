@@ -1,8 +1,8 @@
 package com.takami.rest.Service;
 
 import com.takami.rest.Exceptions.EmailExistException;
-import com.takami.rest.jwt.JwtUtil;
-import com.takami.rest.jwt.MyUserDetailsService;
+//import com.takami.rest.jwt.JwtUtil;
+//import com.takami.rest.jwt.MyUserDetailsService;
 import com.takami.rest.model.User;
 import com.takami.rest.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,14 +15,6 @@ public class UserServiceImpl implements UserService {
 
     public final UserRepository userRepository;
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
-
-    @Autowired
-    private MyUserDetailsService myUserDetailsService;
-
-    @Autowired
-    private JwtUtil jwtTokenUtil;
 
 
     public UserServiceImpl(UserRepository userRepository) {
@@ -52,4 +44,11 @@ public class UserServiceImpl implements UserService {
     public User loadUserByUsername(String username) {
         return userRepository.getByUsername(username);
     }
+
+    @Override
+    public User getUserById(Long id) {
+        return userRepository.findById(id).get();
+    }
+
+
 }

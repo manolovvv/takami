@@ -4,14 +4,19 @@ import com.takami.rest.model.*;
 import com.takami.rest.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Component
 public class FakeData implements CommandLineRunner {
 
+
+    PasswordEncoder passwordEncoder;
 
     @Autowired
     private final RodRepository rodRepository;
@@ -72,24 +77,32 @@ public class FakeData implements CommandLineRunner {
         orderItemRepository.save(orderItem1);
 
         Request request = new Request();
-        List<OrderItem> orderItemsRequest1 = new ArrayList<OrderItem>();
+        List<OrderItem> orderItemsRequest1 = new ArrayList<>();
         orderItemsRequest1.add(orderItem);
         orderItemsRequest1.add(orderItem1);
         request.setOrderItem(orderItemsRequest1);
         requestRepository.save(request);
 
+        User admin = new User();
+        admin.setUsername("admin");
+        admin.setPassword("$2a$10$h0P4yumzNORrna5C3uPh/u0bBabBgHK2CCYExqeK3yy6swwnN5nwW");
+        admin.setRole(ERole.ROLE_ADMIN);
+        userRepository.save(admin);
+
+
         User user = new User();
-        user.setPassword("moni123");
+        user.setPassword("$2y$12$M4WhuhQfix4dHqJsiLg0eed5lkd/eHT.jVwsG06/xhNoSGM2LNeXW");
         user.setFamilyName("Manolov");
         user.setFirstName("Moni");
         user.setEmail("moni.manolov@abv.bg");
         user.setUsername("moni");
         user.setAddress("Eindhoven");
-        List<Request> request1 = new ArrayList<Request>();
+        user.setRole(ERole.ROLE_USER);
+        List<Request> request1 = new ArrayList<>();
         user.setRequests(request1);
        userRepository.save(user);
 
-       // request.setCustomer(customer);
+        request.setUser(user);
         requestRepository.save(request);
 
         request1.add(request);

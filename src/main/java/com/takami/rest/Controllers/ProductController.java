@@ -10,6 +10,7 @@ import com.takami.rest.model.Rod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -45,6 +46,7 @@ public class ProductController {
         return new ResponseEntity<Product>(p, HttpStatus.OK);
     }*/
     @PostMapping("/addReel")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public @ResponseBody ResponseEntity<Reel> addNewReel(@RequestBody Reel reel)
     {
 
@@ -52,6 +54,7 @@ public class ProductController {
 
     }
     @PostMapping("/addRod")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public @ResponseBody ResponseEntity<Rod> addNewRod(@RequestBody Rod rod)
     {
 
@@ -60,11 +63,13 @@ public class ProductController {
     }
 
     @PostMapping("/addHook")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public @ResponseBody ResponseEntity<Hook> addNewHook(@RequestBody Hook hook){
         return new ResponseEntity<Hook>(productService.addNewHook(hook),HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public @ResponseBody int deleteProduct(@PathVariable("id") Long id){
         productService.deleteProduct(id);
         return 1;

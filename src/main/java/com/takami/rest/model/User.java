@@ -1,9 +1,11 @@
 package com.takami.rest.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -15,22 +17,19 @@ public class User {
     private String username;
     private String password;
 
-    public String getRole() {
-        return role;
-    }
 
-    public void setRole(String role) {
-        this.role = role;
-    }
 
-    private String role;
+    @Enumerated(EnumType.STRING)
+    private ERole role;
+
     private String email;
     private String address;
     private String firstName;
     private String familyName;
 
 
-    @OneToMany
+    @JsonIgnore
+    @OneToMany(fetch =  FetchType.LAZY)
     @JoinTable(
             name="user_request",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -49,7 +48,7 @@ public class User {
     public User(String username, String password, String role){
         this.username = username;
         this.password = password;
-        this.role = role;
+
     }
 
     public Long getId() {
@@ -115,5 +114,22 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+
+    public ERole getRole() {
+        return role;
+    }
+
+    public void setRole(ERole role) {
+        this.role = role;
+    }
+
+    public void removeRequestById(Long id){
+        requests.remove(id);
+    }
+
+    public void addRequest(Request request){
+        requests.add(request);
     }
 }
