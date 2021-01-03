@@ -1,14 +1,12 @@
 package com.takami.rest.Controllers;
 
+import com.takami.rest.Requests.RequestOrderItem;
 import com.takami.rest.Service.RequestService;
-import com.takami.rest.model.OrderItem;
 import com.takami.rest.model.Request;
 import com.takami.rest.model.User;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -50,8 +48,10 @@ public class RequestController {
     }
 
     @PostMapping("/newRequest/{id}")
-    public Long createRequest(@RequestBody Request request, @PathVariable Long id){
-        //return requestService.createNewRequest(request,id);
-        return request.getOrderItem().get(1).getId();
+    public String createRequest(@RequestBody List<RequestOrderItem> orderItems, @PathVariable Long id){
+
+        return requestService.createNewRequest(orderItems,id);
+
     }
+
 }

@@ -13,8 +13,8 @@ class OrderItemTest {
         Request request = new Request();
         request.setId(new Long(3));
         OrderItem orderItem = new OrderItem();
-       // orderItem.setRequest(request);
-        //assertEquals(orderItem.getRequest().getId(),3);
+        orderItem.setRequest(request);
+        assertEquals(orderItem.getRequest().getId(),3);
     }
 
     @Test
@@ -27,7 +27,7 @@ class OrderItemTest {
 
     @Test
     void setProduct() {
-        Product reel = new Reel();
+        Product reel = new Product();
         reel.setName("reel");
         OrderItem orderItem = new OrderItem();
         orderItem.setProduct(reel);

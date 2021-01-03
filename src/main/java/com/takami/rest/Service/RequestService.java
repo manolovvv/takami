@@ -1,9 +1,9 @@
 package com.takami.rest.Service;
 
+import com.takami.rest.Requests.RequestOrderItem;
 import com.takami.rest.model.Request;
 
 import java.util.List;
-import java.util.Set;
 
 public interface RequestService {
     Request getRequestById(Long id);
@@ -12,5 +12,5 @@ public interface RequestService {
 
     String deleteRequestById(Long id);
 
-    String createNewRequest(Request request, Long id);
+    String createNewRequest(List<RequestOrderItem> request, Long id);
 }

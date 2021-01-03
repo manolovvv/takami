@@ -1,16 +1,14 @@
 package com.takami.rest.Service;
 
 
+import com.takami.rest.Requests.RequestOrderItem;
 import com.takami.rest.model.OrderItem;
-import com.takami.rest.model.Product;
 import com.takami.rest.model.Request;
 import com.takami.rest.model.User;
 import com.takami.rest.repositories.OrderItemRepository;
 import com.takami.rest.repositories.ProductRepository;
 import com.takami.rest.repositories.RequestRepository;
 import com.takami.rest.repositories.UserRepository;
-import org.aspectj.weaver.ast.Or;
-import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,13 +41,13 @@ public class RequestServiceImpl implements RequestService {
     public Request getRequestById(Long id) {
 
         try {
-            Request request = new Request();
-            Long newId  = requestRepository.getOne(id).getId();
-            request.setId(newId);
-            User u = requestRepository.getOne(id).getUser();
-            request.setUser(u);
-            List<OrderItem> orderItems = requestRepository.getOne(id).getOrderItem();
-            request.setOrderItem(orderItems);
+            Request request = /*new Request()*/ requestRepository.getOne(id);
+           // Long newId  = requestRepository.getOne(id).getId();
+           // request.setId(newId);
+           // User u = requestRepository.getOne(id).getUser();
+           //  request.setUser(u);
+           //   List<OrderItem> orderItems = requestRepository.getOne(id).getOrderItem();
+           //  request.setOrderItem(orderItems);
 
             return request;
 
@@ -93,25 +91,27 @@ public class RequestServiceImpl implements RequestService {
     }
 
     @Override
-    public String createNewRequest(Request request, Long id) {
+    public String createNewRequest(List<RequestOrderItem> orderItems, Long id) {
         Request newRequest = new Request();
-        List<OrderItem> orderItems = request.getOrderItem();
+        User user = userRepository.findById(id).get();
+        user.addRequest(newRequest);
+        newRequest.setUser(user);
+        Request r = requestRepository.save(newRequest);
         List<OrderItem> newOrderItems = new ArrayList<>();
-        for(OrderItem or:orderItems){
+        for(RequestOrderItem RoR:orderItems){
             OrderItem orderItem = new OrderItem();
-            orderItem.setProduct(productRepository.getOne(or.getProduct().getId()));
-            orderItem.setQuantity(or.getQuantity());
+            orderItem.setProduct(productRepository.getOne(RoR.getProductId()));
+            orderItem.setQuantity(RoR.getQuantity());
+            orderItem.setRequest(requestRepository.getOne(r.getId()));
+            orderItem.setTotalPrice(RoR.getQuantity()*productRepository.getOne(RoR.getProductId()).getPrice());
             newOrderItems.add(orderItem);
             orderItemRepository.save(orderItem);
 
 
         }
-        newRequest.setOrderItem(orderItems);
-        User user = userRepository.findById(id).get();
-        user.addRequest(newRequest);
-        newRequest.setUser(user);
-        requestRepository.save(newRequest);
-        return null;
+        newRequest.setOrderItem(newOrderItems);
+        ;
+        return "Created";
 
     }
 

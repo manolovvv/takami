@@ -8,4 +8,5 @@ public interface UserService {
     public String registerCustomer(User user) throws EmailExistException;
     public User loadUserByUsername(String username);
     public User getUserById(Long id);
+    public User changePasswordOfUser(User user, Long id);
 }
