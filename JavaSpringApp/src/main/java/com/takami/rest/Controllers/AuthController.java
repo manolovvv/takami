@@ -6,6 +6,7 @@ import com.takami.rest.jwt.JwtUtils;
 import com.takami.rest.jwt.LoginRequest;
 import com.takami.rest.jwt.UserDetailsImpl;
 import com.takami.rest.model.ERole;
+import com.takami.rest.model.User;
 import com.takami.rest.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -54,61 +55,36 @@ public class AuthController {
                 .map(item -> item.getAuthority())
                 .collect(Collectors.toList());
 
-        return ResponseEntity.ok(new JwtResponse(jwt,roles));
+        Long id = userDetails.getId();
+
+        return ResponseEntity.ok(new JwtResponse(jwt,roles,id));
     }
 
-    /*@PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
+    @PostMapping("/signup")
+    public ResponseEntity<?> registerUser( @RequestBody User signUpRequest) {
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
             return ResponseEntity
                     .badRequest()
-                    .body(new MessageResponse("Error: Username is already taken!"));
+                    .body("Error: Username is already taken!");
         }
 
         if (userRepository.existsByEmail(signUpRequest.getEmail())) {
             return ResponseEntity
                     .badRequest()
-                    .body(new MessageResponse("Error: Email is already in use!"));
+                    .body("Error: Email is already in use!");
         }
 
         // Create new user's account
-        User user = new User(signUpRequest.getUsername(),
-                signUpRequest.getEmail(),
-                encoder.encode(signUpRequest.getPassword()));
-
-        Set<String> strRoles = signUpRequest.getRole();
-        Set<Role> roles = new HashSet<>();
-
-        if (strRoles == null) {
-            Role userRole = roleRepository.findByName(ERole.ROLE_USER)
-                    .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-            roles.add(userRole);
-        } else {
-            strRoles.forEach(role -> {
-                switch (role) {
-                    case "admin":
-                        Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(adminRole);
-
-                        break;
-                    case "mod":
-                        Role modRole = roleRepository.findByName(ERole.ROLE_MODERATOR)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(modRole);
-
-                        break;
-                    default:
-                        Role userRole = roleRepository.findByName(ERole.ROLE_USER)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(userRole);
-                }
-            });
-        }
-
-        user.setRoles(roles);
+        User user = new User();
+        user.setUsername(signUpRequest.getUsername());
+        user.setPassword(encoder.encode(signUpRequest.getPassword()));
+        user.setFirstName(signUpRequest.getFamilyName());
+        user.setFamilyName(signUpRequest.getFamilyName());
+        user.setAddress(signUpRequest.getAddress());
+        user.setEmail(signUpRequest.getEmail());
+        user.setRole(ERole.ROLE_USER);
         userRepository.save(user);
 
-        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
-    }*/
+        return ResponseEntity.ok("User registered successfully!");
+    }
 }

@@ -4,10 +4,13 @@ import java.util.List;
 
 public class JwtResponse {
    String jwt;
-   List<String> roles;
+   String role;
+   Long id;
 
-    public JwtResponse(String jwt, List<String> roles) {
+    public JwtResponse(String jwt, List<String> roles, Long id) {
         this.jwt = jwt;
+       this.id = id;
+        this.role = roles.get(0).toString();
     }
 
     public String getJwt() {
@@ -18,11 +21,20 @@ public class JwtResponse {
         this.jwt = jwt;
     }
 
-    public List<String> getRoles() {
-        return roles;
+
+    public String getRole() {
+        return role;
     }
 
-    public void setRoles(List<String> roles) {
-        this.roles = roles;
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

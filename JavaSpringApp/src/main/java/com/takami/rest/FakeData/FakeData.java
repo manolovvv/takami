@@ -16,12 +16,6 @@ public class FakeData implements CommandLineRunner {
 
     PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private final RodRepository rodRepository;
-
-    @Autowired
-    private final ReelRepository reelRepository;
-
    @Autowired
     private final OrderItemRepository orderItemRepository;
 
@@ -31,16 +25,16 @@ public class FakeData implements CommandLineRunner {
     @Autowired
     private final RequestRepository requestRepository;
 
+    @Autowired
+    private final ProductRepository productRepository;
 
-    public FakeData(UserRepository userRepository, RodRepository rodRepository, ReelRepository reelRepository,/*, OrderItemRepository orderItemRepository*/OrderItemRepository orderItemRepository, RequestRepository requestRepository) {
 
-        this.rodRepository = rodRepository;
+    public FakeData(UserRepository userRepository, OrderItemRepository orderItemRepository, RequestRepository requestRepository, ProductRepository productRepository) {
+
         this.userRepository = userRepository;
-
-        this.reelRepository = reelRepository;
-       // this.orderItemRepository = orderItemRepository;
         this.orderItemRepository = orderItemRepository;
         this.requestRepository = requestRepository;
+        this.productRepository = productRepository;
     }
 
     @Override
@@ -49,37 +43,59 @@ public class FakeData implements CommandLineRunner {
         System.out.println("Products loading");
 
 
-        Rod rod = new Rod();
-        rod.setAmount(3);
-        rod.setName("rod");
-        rod.setPathToImage("sadas");
-        rod.setPrice(123);
-        rodRepository.save(rod);
+        Product rod1 = new Product();
+        rod1.setAmount(8);
+        rod1.setName("Feeder rod");
+        rod1.setPathToImage("<Image>");
+        rod1.setAvailable(true);
+        rod1.setPrice(50.6);
+        rod1.setProductType(ProductType.ROD);
+        rod1.setDescription("Good rod/Nice price");
+        productRepository.save(rod1);
 
-        Reel reel = new Reel();
-        reel.setName("reel");
-        reel.setAmount(3);
-        reel.setDrag(30);
-        reel.setWeight(550);
-        reel.setPrice(40);
-        reelRepository.save(reel);
+        Product reel1 = new Product();
+        reel1.setName("Match reel");
+        reel1.setAmount(3);
+        reel1.setPrice(40);
+        reel1.setAvailable(true);
+        reel1.setProductType(ProductType.REEL);
+        reel1.setPathToImage("<Image>");
+        reel1.setDescription("Good reel/ Nice price");
+        productRepository.save(reel1);
+
+        Product hook1 = new Product();
+        hook1.setName("Hook");
+        hook1.setAmount(40);
+        hook1.setAvailable(true);
+        hook1.setPrice(4.36);
+        hook1.setProductType(ProductType.HOOK);
+        hook1.setPathToImage("<Image>");
+        hook1.setDescription("Nice hooks/Hooks for match");
+        productRepository.save(hook1);
 
         OrderItem orderItem = new OrderItem();
         orderItem.setQuantity(3);
-        orderItem.setProduct(rodRepository.getOne( Long.valueOf(1)));
+        orderItem.setProduct(productRepository.getOne( Long.valueOf(1)));
         orderItemRepository.save(orderItem);
 
         OrderItem orderItem1 = new OrderItem();
         orderItem1.setQuantity(3);
-        orderItem1.setProduct(reelRepository.getOne(Long.valueOf(2)));
+        orderItem1.setProduct(productRepository.getOne(Long.valueOf(2)));
         orderItemRepository.save(orderItem1);
 
         Request request = new Request();
-        List<OrderItem> orderItemsRequest1 = new ArrayList<OrderItem>();
+        List<OrderItem> orderItemsRequest1 = new ArrayList<>();
         orderItemsRequest1.add(orderItem);
         orderItemsRequest1.add(orderItem1);
         request.setOrderItem(orderItemsRequest1);
         requestRepository.save(request);
+
+        User admin = new User();
+        admin.setUsername("admin");
+        admin.setPassword("$2a$10$h0P4yumzNORrna5C3uPh/u0bBabBgHK2CCYExqeK3yy6swwnN5nwW");
+        admin.setRole(ERole.ROLE_ADMIN);
+        userRepository.save(admin);
+
 
         User user = new User();
         user.setPassword("$2y$12$M4WhuhQfix4dHqJsiLg0eed5lkd/eHT.jVwsG06/xhNoSGM2LNeXW");
@@ -89,11 +105,11 @@ public class FakeData implements CommandLineRunner {
         user.setUsername("moni");
         user.setAddress("Eindhoven");
         user.setRole(ERole.ROLE_USER);
-        List<Request> request1 = new ArrayList<Request>();
+        List<Request> request1 = new ArrayList<>();
         user.setRequests(request1);
        userRepository.save(user);
 
-       // request.setCustomer(customer);
+        request.setUser(user);
         requestRepository.save(request);
 
         request1.add(request);

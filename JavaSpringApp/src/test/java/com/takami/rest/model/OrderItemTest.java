@@ -27,7 +27,7 @@ class OrderItemTest {
 
     @Test
     void setProduct() {
-        Product reel = new Reel();
+        Product reel = new Product();
         reel.setName("reel");
         OrderItem orderItem = new OrderItem();
         orderItem.setProduct(reel);

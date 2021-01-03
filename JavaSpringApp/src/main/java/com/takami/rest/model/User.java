@@ -1,9 +1,11 @@
 package com.takami.rest.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -26,7 +28,8 @@ public class User {
     private String familyName;
 
 
-    @OneToMany
+    @JsonIgnore
+    @OneToMany(fetch =  FetchType.LAZY)
     @JoinTable(
             name="user_request",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -120,5 +123,13 @@ public class User {
 
     public void setRole(ERole role) {
         this.role = role;
+    }
+
+    public void removeRequestById(Long id){
+        requests.remove(id);
+    }
+
+    public void addRequest(Request request){
+        requests.add(request);
     }
 }

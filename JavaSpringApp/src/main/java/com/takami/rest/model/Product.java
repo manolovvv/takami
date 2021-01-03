@@ -2,6 +2,7 @@ package com.takami.rest.model;
 
 import com.sun.istack.NotNull;
 import lombok.Data;
+import org.hibernate.annotations.Type;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
@@ -9,30 +10,54 @@ import java.util.Set;
 
 
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public abstract class Product {
+public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-protected Long id;
+    private Long id;
 
-    protected int amount;
-    protected double price;
-protected String name;
-protected String pathToImage;
+    private int amount;
+    private double price;
+    private String name;
+    private String pathToImage;
+
+    @Enumerated(EnumType.STRING)
+    private ProductType productType;
+    private String description;
+
+
+    @Column(nullable = false, columnDefinition = "TINYINT(1)")
+    private boolean available;
 
 
 
-    protected Product(int amount, double price, String name, String pathToImage) {
 
+
+    public Product() {
+
+    }
+
+
+
+    public Product(Long id, int amount, double price, String name, String pathToImage, ProductType productType, String description) {
+        this.id = id;
         this.amount = amount;
         this.price = price;
         this.name = name;
         this.pathToImage = pathToImage;
+        this.productType = productType;
+        this.description = description;
     }
 
-    protected Product() {
-
+    public Product(Long id, int amount, double price, String name, String pathToImage, ProductType productType, String description, boolean available) {
+        this.id = id;
+        this.amount = amount;
+        this.price = price;
+        this.name = name;
+        this.pathToImage = pathToImage;
+        this.productType = productType;
+        this.description = description;
+        this.available = available;
     }
 
 
@@ -40,6 +65,17 @@ protected String pathToImage;
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public ProductType getProductType() {
+        return productType;
+    }
+
+    public void setProductType(ProductType productType) {
+        this.productType = productType;
+    }
 
     public int getAmount() {
         return amount;
@@ -81,6 +117,23 @@ protected String pathToImage;
             this.amount = this.amount - amount;
             return true;
         }
+    }
+
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
     }
 }
 

@@ -15,8 +15,8 @@ public class OrderItem {
     private Long id;
 
     @ManyToOne
-            @JoinColumn(name = "request_id")
-            @JsonIgnore
+    @JoinColumn(name = "request_id")
+    @JsonIgnore
     Request request;
 
     @ManyToOne
@@ -25,6 +25,15 @@ public class OrderItem {
     Product product;
 
     int quantity;
+    double totalPrice;
+
+    public OrderItem(Long id, Request request, Product product, int quantity, double totalPrice) {
+        this.id = id;
+        this.request = request;
+        this.product = product;
+        this.quantity = quantity;
+        this.totalPrice = totalPrice;
+    }
 
     public Request getRequest() {
         return request;
@@ -70,5 +79,13 @@ public class OrderItem {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
     }
 }

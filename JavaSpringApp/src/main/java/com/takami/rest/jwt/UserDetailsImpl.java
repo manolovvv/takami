@@ -53,6 +53,10 @@ public class UserDetailsImpl implements UserDetails {
         return password;
     }
 
+    public Long getId(){
+        return this.id;
+    }
+
     @Override
     public String getUsername() {
         return username;

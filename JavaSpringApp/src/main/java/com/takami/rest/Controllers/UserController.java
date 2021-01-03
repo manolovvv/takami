@@ -3,14 +3,21 @@ package com.takami.rest.Controllers;
 
 import com.takami.rest.Exceptions.EmailExistException;
 import com.takami.rest.Service.UserService;
+import com.takami.rest.jwt.JwtUtils;
 import com.takami.rest.model.User;
+import com.takami.rest.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+
+import javax.websocket.server.PathParam;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -18,10 +25,39 @@ public class UserController {
 
     public final UserService userService;
 
+    @Autowired
+    AuthenticationManager authenticationManager;
 
+    @Autowired
+    PasswordEncoder encoder;
+
+    @Autowired
+    JwtUtils jwtUtils;
 
     public UserController(UserService userService) {
         this.userService = userService;
+    }
+
+
+    @PutMapping("/changePassword/{id}")
+    public String changePasswordOfUser(@RequestBody User user, @PathVariable Long id){
+        User u  = userService.changePasswordOfUser(user, id);
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(u.getUsername(), user.getPassword()));
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        String jwt = jwtUtils.generateJwtToken(authentication);
+
+
+
+
+
+        return jwt;
+    }
+
+    @GetMapping
+    public String getHeader(@RequestHeader("Authorization") String authorization){
+        return authorization;
     }
 
   //  @PostMapping("/login")
@@ -58,13 +94,13 @@ public class UserController {
     //}
 
 
-    @PostMapping("/registerCustomer")
-    public String register(@RequestBody User user) throws EmailExistException {
-        try{
-        return userService.registerCustomer(user);}
-        catch (Exception ex){
-            return ex.toString();
-        }
+
+
+
+
+    @GetMapping("/getUserById/{id}")
+    public User getUserById(@PathVariable("id") Long id){
+        return userService.getUserById(id);
     }
 
 }
