@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import ProductService from '../Service/ProductService'
-import { Card, Button } from 'react-bootstrap'
-import {options} from '../constants/constants'
+import { Card, Button, Container, Row, Col } from 'react-bootstrap'
+import { options } from '../constants/constants'
+import "./ProductListComponent.css"
+import ProductInList from "./fragments/ProductFragment"
 
 class ProductListComponent extends Component {
 
@@ -10,67 +12,62 @@ class ProductListComponent extends Component {
         this.state = {
             products: []
         }
+        this.ListProductCards = this.ListProductCards(this);
     }
 
-    componentDidMount() {
-        ProductService.getProducts(options).then((res) => {
-            this.setState({ products: res.data })
-        })
+    componentWillMount() {
+        let allProducts = JSON.parse(localStorage.getItem("allProducts"));
+        console.log(this.props.productType);
+    
+        let allProductsToShow = allProducts.filter(product=>product.productType ===this.props.productType);
+        
+        console.log(allProductsToShow);
+        this.setState({ products: allProductsToShow }, () => 
+        console.log(this.state.products));
+        
+        //console.log(JSON.parse(localStorage.getItem("allProducts")));
 
+
+    }
+
+    ListProductCards = (products) => {
+        console.log()
+        console.log(this.state.products)
+        let productsToShow = this.state.products.filter(product=> product.productType ===this.props.productType)
+        console.log(productsToShow);
+        productsToShow.map(
+            (product, index) => {
+
+                return (
+
+                    ProductInList(product)
+                )
+            }
+        )
     }
 
     render() {
         return (
-            /* <div>
-                 <table>
-                     <tbody>
-                         <tr>
-                             <th>Name</th>
-                             <th>Price</th>
-                             <th>Quantity</th>
-                         </tr>
-                     </tbody>
-                     <tbody>
-                     {
-                         this.state.products.map(
-                             product =>
-                                 <tr key={product.id}>
-                                 <td> {product.name}</td>
-                                 <td> {product.price}</td> 
-                                 <td> {product.quantity}</td> 
-                                 </tr> 
- 
- 
-                                 
-                         )
- 
-                     }
-                     </tbody>
-                    </table>
-             </div>*/
+            <div className="wrapper">
+                <Container>
+                    <Row>
+                        {
+                            this.state.products.map(
+                                (product, index) => {
 
+                                    return (
 
-            this.state.products.map(
-                (product, index) => {
+                                        <Col sm key={product.id}> {ProductInList(product)}</Col>
 
-                    return     <Card style={{ width: '15rem' }} key = {product.id}>
-                            <Card.Img variant="top" src="holder.js/100px180" />
-                            <Card.Body>
-                                <Card.Title>{product.name}</Card.Title>
-                                <Card.Text>
-                                    price: {product.price}<br/>
-                                    quantity: {product.amount}<br/>
-                                    {index}
-                                </Card.Text>
-                                <Button variant="primary">See more details</Button>
-                            </Card.Body>
-
-                        </Card>
-                  
-                }
-            )
-
+                                    )
+                                }
+                            )}
+                    </Row>
+                    {/* {this.ListProductCards(this.state.products)} */}
+                </Container>
+            </div>
         )
+
     }
 
 

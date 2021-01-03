@@ -14,8 +14,7 @@ class LogoutButtonInHeader extends Component{
 
     handleClick(event){
         alert("loggedOut");
-        sessionStorage.setItem("loggedIn", false);
-        sessionStorage.setItem("JWTToken", null);
+        sessionStorage.clear();
         window.location.reload();
     }
     render() {
@@ -23,6 +22,9 @@ class LogoutButtonInHeader extends Component{
             <div>
                 <Link to="/products">
                     <Button type ="submit" variant="outline-info" onClick={this.handleClick}>Logout</Button>
+                    </Link>
+                    <Link to="/myCart">
+                    {(sessionStorage.getItem('role') === "ROLE_USER")? <Button type ="submit" variant="outline-info" /*onClick={() }*/>Cart</Button>:<div></div>}
                     </Link>
             </div>
 
