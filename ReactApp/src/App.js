@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import './App.css';
 //import ProductListComponent from './Component/ProductListComponent'
-import Header from './Component/Header/Header'
+//import Header from './Component/Header/Header'
+import Header from './Component/Header/Header2'
 import LoginComponent from './Component/LoginComponent'
+import AllProductsComponent from './Component/allProductsComponent';
+//import LoginComponent from './Component/LoginComponentFunction'
 import {BrowserRouter as Router,Switch,Route} from 'react-router-dom'
 import ProductListComponent from './Component/ProductListComponent';
 import AddProductComponent from "./Component/AddProductComponent";
@@ -12,40 +15,30 @@ import ContactMeComponent from './Component/ContactMeComponent'
 import CartComponent from './Component/CartComponent'
 import RegisterComponent from './Component/RegisterComponent'
 import ProductService from './Service/ProductService'
+//import MasterDetails from './Component/MasterDetailsComponent'
 import {options} from './constants/constants'
+import MasterDetails from './Component/MasterDetailss'
 
 function App() {
 
-let allProducts;
-let rods;
-let reels;
-let hooks;
 
-ProductService.getProducts(options).then((res) => {
-  localStorage.setItem("allProducts", JSON.stringify(res.data));
-  rods =  res.data.filter(product=> product.name ==="rod");
-  console.log(rods);
-  localStorage.setItem("rods",JSON.stringify(rods));
-  reels = res.data.filter(product => product.name === "reel");
-  localStorage.setItem("reels", JSON.stringify(reels));
-  hooks = res.data.filter(product => JSON.stringify(hooks));
-  localStorage.setItem("hooks", JSON.stringify(hooks));
+  ProductService.getProducts(options).then((res) => {
+    localStorage.setItem("allProducts", JSON.stringify(res.data));
+    
+  })
 
 
-
- // console.log(JSON.stringify(res.data));
-  //console.log("rods"+ JSON.parse(rods));
-  
-  
-  
-})
 
   return (
    // <LoginComponent/>
-    // <AddProductComponent/>
+    // 
     <Router >
+      <Route>
       <Header />
-      
+      </Route>
+      <Route exact path ="/products">
+      <AllProductsComponent />
+      </Route> 
       <Route path = "/login">
         <LoginComponent/>
       </Route>
@@ -61,14 +54,20 @@ ProductService.getProducts(options).then((res) => {
       <Route path = "/aboutme">
       <AboutMeComponent/>
       </Route> 
-      <Route path = "/contactme">
+      {/* <Route path = "/contactme">
         <ContactMeComponent/>
-      </Route>
+      </Route> */}
       <Route path = "/register">
         <RegisterComponent/>
       </Route>
       <Route path="/myCart">
         <CartComponent/>
+      </Route>
+      <Route path="/masterDetails/:id">
+        <MasterDetails/>
+      </Route>
+      <Route path="/addNewProduct">
+      <AddProductComponent/>
       </Route>
     </Router>
      

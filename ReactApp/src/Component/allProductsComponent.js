@@ -12,39 +12,52 @@ class ProductListComponent extends Component {
         this.state = {
             products: []
         }
-       // this.ListProductCards = this.ListProductCards(this);
+        this.ListProductCards = this.ListProductCards(this);
     }
 
-    async componentDidMount() {
-       await ProductService.getProducts(options).then((res) => {
-           localStorage.setItem("allProducts", JSON.stringify(res.data));
+
+
+    componentWillMount() {
+        
+        ProductService.getProducts(options).then((res) => {
+            localStorage.setItem("allProducts", JSON.stringify(res.data));
             
           })
-        
-        
 
 
         let allProducts = JSON.parse(localStorage.getItem("allProducts"));
-        console.log("ptyper")
         console.log(this.props.productType);
         let allProductsToShow
         if(sessionStorage.getItem('role') ==="ROLE_ADMIN"){
-             allProductsToShow = allProducts.filter(product=>product.productType === this.props.productType);
+             allProductsToShow = allProducts;
         }
         else{
-             allProductsToShow = allProducts.filter(product=>product.productType ===this.props.productType && product.available ===true);
+             allProductsToShow = allProducts.filter(product=> product.available ===true);
         }
         console.log(allProductsToShow);
-        await this.setState({ products: allProductsToShow })/*, () =>*/ 
+        this.setState({ products: allProductsToShow })/*, () =>*/ 
         //console.log(this.state.products));
-        console.log("tuk");
-        console.log(this.state.products)
+        
         //console.log(JSON.parse(localStorage.getItem("allProducts")));
 
 
     }
 
-    // 
+    ListProductCards = (products) => {
+        console.log()
+        console.log(this.state.products)
+        let productsToShow = this.state.products.filter(product=> product.productType ===this.props.productType)
+        console.log(productsToShow);
+        productsToShow.map(
+            (product, index) => {
+           
+                return (
+                   
+                    ProductInList(product)
+                )
+            }
+        )
+    }
 
     render() {
         return (
@@ -54,7 +67,13 @@ class ProductListComponent extends Component {
                         {
                             this.state.products.map(
                                 (product, index) => {
-
+                                    // if((index+1)%3 ===0){
+                                    //     return (
+                                           
+                                    //         <Col sm key={product.id}> {ProductInList(product)}</Col>
+                                          
+                                    //     )
+                                    // }
                                     return (
 
                                         <Col sm key={product.id}> {ProductInList(product)}</Col>

@@ -34,6 +34,7 @@ class LoginComponent extends Component {
             sessionStorage.setItem('JWTToken', res.data.jwt);
             console.log(sessionStorage.getItem('JWTToken'));
             sessionStorage.setItem("loggedIn", true);
+            sessionStorage.setItem("loggedInNow", true);
             sessionStorage.setItem("role",res.data.role);
             sessionStorage.setItem("id",res.data.id);
             

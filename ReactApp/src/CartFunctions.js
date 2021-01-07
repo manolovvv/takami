@@ -91,21 +91,30 @@ export function deleteCart(){
     sessionStorage.removeItem('cart');
 }
 
-export function deleteProductFromCart(productId){
-    let cartItems = sessionStorage.getItem('cart');
-    //let cartItems = JSON.parse(sessionStorage.getItem('cart'));
-    console.log("delete");
-    if(!Array.isArray(cartItems)){
+export async function deleteProductFromCart(productId){
+    let cartItems = JSON.parse(sessionStorage.getItem('cart'));
+  
+    console.log(sessionStorage.getItem('cart'));
+    //console.log("delete");
+    //console.log(cartItems);
+    if(!Array.isArray(cartItems) || (cartItems.length ===1)){
+        //console.log(1);
         sessionStorage.removeItem('cart');
     }
     else{
+        //console.log("delete222")
     for(let i=0;i<cartItems.length;i++){
-        if(cartItems[i] ===productId){
+        //console.log(cartItems[i].productId+"cikal")
+        
+        if(cartItems[i].productId === productId){
+          
         cartItems = cartItems.splice(i,1);
+        //console.log("sled");
+        //console.log(JSON.stringify(cartItems));
         sessionStorage.setItem('cart',JSON.stringify(cartItems))
 
         }
-        console.log(cartItems);
+        //console.log(cartItems);
     }
     }
     window.location.reload();
