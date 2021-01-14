@@ -1,16 +1,24 @@
-import React, { Component } from 'react'
+import React, { Component, useEffect,useState } from 'react'
 import './Header.css'
 import { Link } from 'react-router-dom'
 import { Navbar, Nav, Form,FormControl, Button, Image, NavDropdown,Container, Row,Col } from 'react-bootstrap'
 import LoginAndRegisterButtonsInHeader from './LoginAndRegisterButtonsInHeader'
 import LogoutButtonInHeader from './LogoutButtonInHeader'
 
-class Header extends Component {
+const Header =(props)=> {
+
+    
+    const[role,setRole] = useState();
+
+    
+    useEffect(()=>{
+
+    setRole(sessionStorage.getItem('role'));    
+     // console.log(1);
+    });
 
 
-
-
-  render() {
+  
    
     return (
     <Navbar bg="light" expand="lg">
@@ -18,10 +26,10 @@ class Header extends Component {
   <Navbar.Toggle aria-controls="basic-navbar-nav" />
   <Navbar.Collapse id="basic-navbar-nav">
     <Nav className="mr-auto">
-     {/* // <Nav.Link href="/home">Home</Nav.Link> */}
+      {/* <Nav.Link href="/home">Home</Nav.Link> */}
       <Nav.Link href="/aboutme">About me</Nav.Link>
-      //<Nav.Link href="/contactme">Contact me</Nav.Link>
-      {role === "ROLE_ADMIN" ?<Nav.Link href="/addNewProduct">Add new product</Nav.Link>: null} 
+      {/* <Nav.Link href="/contactme">Contact me</Nav.Link> */}
+     {role === "ROLE_ADMIN" ?<Nav.Link href="/addNewProduct">Add new product</Nav.Link>: null} 
       <NavDropdown title="Categories" id="basic-nav-dropdown">
         <NavDropdown.Item href="/products/rods">Rods</NavDropdown.Item>
         <NavDropdown.Item href="/products/reels">Reels</NavDropdown.Item>
@@ -40,5 +48,5 @@ class Header extends Component {
   }
 
 
-}
+
 export default Header
