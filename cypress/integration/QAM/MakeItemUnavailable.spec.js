@@ -33,4 +33,8 @@ describe("Make item unavailable",function(){
     it("Check if the item exists",function(){
         cy.contains('test').should('not.exist')
     })
+
+    it("Logout",function(){
+        cy.Logout()
+    })
 })
