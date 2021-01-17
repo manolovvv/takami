@@ -11,8 +11,6 @@ build:
 
 test:
   stage: test
-  dependencies:
-    - build
   script:
     - npx cypress run
 
