@@ -1,18 +1,11 @@
-
 stages:
-  - build
+
   - test
 
 
-build:
-  stage: build
-  script:
-    - npm run-script build
 
 test:
   stage: test
-  dependencies:
-    - build
   script:
     - npx cypress run
 
