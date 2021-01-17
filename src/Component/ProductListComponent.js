@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ProductService from '../Service/ProductService'
-import { Card, Button, Container, Row, Col } from 'react-bootstrap'
+import { Container, Row, Col } from 'react-bootstrap'
 import { options } from '../constants/constants'
 import "./ProductListComponent.css"
 import ProductInList from "./fragments/ProductFragment"
@@ -12,19 +12,16 @@ class ProductListComponent extends Component {
         this.state = {
             products: []
         }
-       // this.ListProductCards = this.ListProductCards(this);
     }
 
     async componentDidMount() {
+    let allProducts;
        await ProductService.getProducts(options).then((res) => {
            localStorage.setItem("allProducts", JSON.stringify(res.data));
-            
+            allProducts = res.data;
           })
         
         
-
-
-        let allProducts = JSON.parse(localStorage.getItem("allProducts"));
         console.log("ptyper")
         console.log(this.props.productType);
         let allProductsToShow
@@ -35,35 +32,30 @@ class ProductListComponent extends Component {
              allProductsToShow = allProducts.filter(product=>product.productType ===this.props.productType && product.available ===true);
         }
         console.log(allProductsToShow);
-        await this.setState({ products: allProductsToShow })/*, () =>*/ 
-        //console.log(this.state.products));
-        console.log("tuk");
-        console.log(this.state.products)
-        //console.log(JSON.parse(localStorage.getItem("allProducts")));
+        await this.setState({ products: allProductsToShow })
 
 
     }
 
-    // 
+    
 
     render() {
         return (
             <div className="wrapper">
                 <Container>
-                    <Row>
+                    <Row >
                         {
                             this.state.products.map(
                                 (product, index) => {
-
+                                    
                                     return (
-
+                                        
                                         <Col sm key={product.id}> {ProductInList(product)}</Col>
 
                                     )
                                 }
                             )}
                     </Row>
-                    {/* {this.ListProductCards(this.state.products)} */}
                 </Container>
             </div>
         )

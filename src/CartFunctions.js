@@ -1,7 +1,7 @@
 
 
 export function addToCart (productId,quantity){
-    let allProducts = JSON.parse(localStorage.getItem("allProducts"));
+   
    
     let cartItems = [];
     if(JSON.parse(sessionStorage.getItem("cart")) ==null){

@@ -1,13 +1,12 @@
 import React, { Component, useEffect, useState } from 'react'
 import { Form, Button } from 'react-bootstrap'
-import LoginService from '../Service/AuthService'
-import { Redirect, Route, useHistory, withRouter } from 'react-router-dom'
+
 import AuthService from '../Service/AuthService'
 
 const LoginComponent =(props)=> {
 
-    const[username,setUsername] = useState();
-    const[password,setPassword] = useState();
+    const[username,setUsername] = useState("");
+    const[password,setPassword] = useState("");
     // constructor(props) {
     //     super(props)
     //     this.state = {

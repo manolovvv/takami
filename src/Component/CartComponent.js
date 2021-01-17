@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { Accordion, Card, Button, Container, Row, Col } from 'react-bootstrap';
-import ProductFragment from './fragments/ProductFragment';
+import { Button, Container, Row, Col } from 'react-bootstrap';
 import ProductInCartFragment from './fragments/ProductInCartFragment'
 import RequestService from '../Service/RequestService'
+import ProductService from '../Service/ProductService'
+import * as options from '../constants/constants'
 
 
 class CartComponent extends Component {
@@ -10,15 +11,22 @@ class CartComponent extends Component {
         super(props)
         this.state = {
             productsInCart: [],
-            productsToShow: []
+            productsToShow: [],
+            allProducts: []
         };
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
 
-    componentDidMount() {
+    async componentDidMount() {
         // this.state.productsInCart:productsInCart
+        this.setState({ allProducts: JSON.parse(localStorage.getItem("allProducts")) })
 
+        await ProductService.getProducts(options).then((res) => {
+            localStorage.setItem("allProducts", JSON.stringify(res.data));
+            // allProducts = res.data;
+            this.setState({ allProducts: JSON.parse(localStorage.getItem("allProducts")) })
+        })
 
         let allProducts = JSON.parse(localStorage.getItem("allProducts"));
         if (!Array.isArray((JSON.parse(sessionStorage.getItem('cart'))))) {
@@ -27,11 +35,10 @@ class CartComponent extends Component {
             //sessionStorage.setItem('cart', JSON.stringify(this.state.productsInCart));
 
 
-            this.state.productsInCart.map(
+            await this.state.productsInCart.map(
                 (product) => {
                     for (let i = 0; allProducts.length; i++) {
                         if (product.productId === allProducts[i]) {
-                            //this.setState({productsToShow:allProducts[i]});
                             this.state.productsToShow.push(allProducts[i]);
                         }
                     }
@@ -42,20 +49,22 @@ class CartComponent extends Component {
         }
         else if ((JSON.parse(sessionStorage.getItem('cart'))) === null) {
             console.log("22")
-            this.setState({ productsInCart: [] });
+            await this.setState({ productsInCart: [] });
 
         }
         else {
             console.log("33")
-            this.setState({ productsInCart: (JSON.parse(sessionStorage.getItem('cart'))) });
+            await this.setState({ productsInCart: (JSON.parse(sessionStorage.getItem('cart'))) });
             console.log(this.state.productsInCart);
             console.log("12312")
 
-            //sessionStorage.setItem('cart',JSON.stringify(this.state.productsInCart));
+            sessionStorage.setItem('cart', JSON.stringify(this.state.productsInCart));
 
         }
 
     }
+
+
 
     handleSubmit(event) {
 
@@ -88,8 +97,10 @@ class CartComponent extends Component {
 
 
     render() {
-        let allProducts = JSON.parse(localStorage.getItem("allProducts"));
-
+        // let allProducts =  JSON.parse(localStorage.getItem("allProducts"));
+        let allProducts = this.state.allProducts;
+        console.log("render")
+        console.log(this.state.allProducts)
         return (
             <div>
                 <h1>My Cart</h1>
@@ -97,7 +108,7 @@ class CartComponent extends Component {
                     {
                         this.state.productsInCart.map(
                             (product, index) => {
-                                console.log(allProducts.length)
+                                // console.log(allProducts.length)
                                 if (product !== null) {
                                     let q = product.quantity;
                                     for (let i = 0; i < allProducts.length; i++) {

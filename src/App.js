@@ -1,22 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
-//import ProductListComponent from './Component/ProductListComponent'
-//import Header from './Component/Header/Header'
 import Header from './Component/Header/Header2'
 import LoginComponent from './Component/LoginComponent'
 import AllProductsComponent from './Component/allProductsComponent';
-//import LoginComponent from './Component/LoginComponentFunction'
-import {BrowserRouter as Router,Switch,Route} from 'react-router-dom'
+import {BrowserRouter as Router,Route} from 'react-router-dom'
 import ProductListComponent from './Component/ProductListComponent';
 import AddProductComponent from "./Component/AddProductComponent";
-import * as Constants from 'constants';
 import AboutMeComponent from './Component/AboutMeComponent'
-import ContactMeComponent from './Component/ContactMeComponent'
 import CartComponent from './Component/CartComponent'
 import RegisterComponent from './Component/RegisterComponent'
-import ProductService from './Service/ProductService'
-//import MasterDetails from './Component/MasterDetailsComponent'
-import {options} from './constants/constants'
 import MasterDetails from './Component/MasterDetailss'
 
 function App() {
@@ -25,8 +17,6 @@ function App() {
 
 
   return (
-   // <LoginComponent/>
-    // 
     <Router >
       <Route>
       <Header />
@@ -49,9 +39,6 @@ function App() {
       <Route path = "/aboutme">
       <AboutMeComponent/>
       </Route> 
-      {/* <Route path = "/contactme">
-        <ContactMeComponent/>
-      </Route> */}
       <Route path = "/register">
         <RegisterComponent/>
       </Route>

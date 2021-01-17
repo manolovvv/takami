@@ -1,7 +1,7 @@
-import React, { Component, useEffect,useState } from 'react'
+import React, {  useEffect,useState } from 'react'
 import './Header.css'
-import { Link } from 'react-router-dom'
-import { Navbar, Nav, Form,FormControl, Button, Image, NavDropdown,Container, Row,Col } from 'react-bootstrap'
+
+import { Navbar, Nav, NavDropdown} from 'react-bootstrap'
 import LoginAndRegisterButtonsInHeader from './LoginAndRegisterButtonsInHeader'
 import LogoutButtonInHeader from './LogoutButtonInHeader'
 
@@ -14,12 +14,8 @@ const Header =(props)=> {
     useEffect(()=>{
 
     setRole(sessionStorage.getItem('role'));    
-     // console.log(1);
-    });
-
-
-  
-   
+    },[]);
+    console.log(sessionStorage.getItem("JWTToken"))
     return (
     <Navbar bg="light" expand="lg">
   <Navbar.Brand href="/products">Takami</Navbar.Brand>
