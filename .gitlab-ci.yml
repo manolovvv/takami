@@ -4,7 +4,6 @@ stages:
 test:
   stage: test
   script:
-    -npx cypress install --force
     - npx cypress run
 
 after_script:
