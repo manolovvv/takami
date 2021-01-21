@@ -1,15 +1,5 @@
 stages:
-  - build
   - test
-
-build:
-  stage: build
-  script:
-   - RUN npm install --silent
--RUN npm install react-scripts
--RUN npm install react-bootstrap
--RUN npm install react-router
-
 
 test:
   stage: test
