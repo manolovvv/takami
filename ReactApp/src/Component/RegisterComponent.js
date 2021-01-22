@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {Form,Button} from 'react-bootstrap'
 import AuthService from '../Service/AuthService'
+import { withRouter } from 'react-router-dom'
 
 class RegisterComponent extends Component {
     constructor(props) {
@@ -30,16 +31,12 @@ class RegisterComponent extends Component {
     handleSubmit(event) {
         event.preventDefault();
         const { username, password,email,firstName,familyName,address } = this.state;
+        console.log(this.state);
 
             AuthService.register(username, password,email,firstName,familyName,address).then((res) => {
-            // sessionStorage.clear();
-            // console.log(res);
-            // sessionStorage.setItem('JWTToken', res.data.jwt);
-            // console.log(sessionStorage.getItem('JWTToken'));
-            // sessionStorage.setItem("loggedIn", true);
-            // sessionStorage.setItem("role",res.data.role);
-            
-            console.log(res);
+           
+            alert(res.data);
+            this.props.history.push('/products');
         })
         
         
@@ -92,4 +89,4 @@ class RegisterComponent extends Component {
 
 }
 
-export default RegisterComponent;
+export default withRouter(RegisterComponent);

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import {Link} from 'react-router-dom'
-import {Navbar,Nav,Form,Button,Image} from 'react-bootstrap'
+import {Button} from 'react-bootstrap'
 
 class LoginAndRegisterButtonsInHeader extends Component {
 

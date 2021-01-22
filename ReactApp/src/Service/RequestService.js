@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { Container } from 'react-bootstrap';
 import * as Constants from '../constants/constants'
 
 const REQUEST_API_BASE_URL = "http://localhost:8080/requests"

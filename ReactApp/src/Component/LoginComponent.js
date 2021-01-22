@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Form, Button } from 'react-bootstrap'
-import LoginService from '../Service/AuthService'
-import { Redirect, Route, useHistory,withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import AuthService from '../Service/AuthService'
 
 class LoginComponent extends Component {
@@ -37,9 +36,12 @@ class LoginComponent extends Component {
             sessionStorage.setItem("loggedInNow", true);
             sessionStorage.setItem("role",res.data.role);
             sessionStorage.setItem("id",res.data.id);
+            this.props.history.push('/products');
+            window.location.reload()
             
-        })
-        this.props.history.push('/products');
+        }).catch(error => alert("Bad credentials"));
+        event.preventDefault();
+        
         
        
     }

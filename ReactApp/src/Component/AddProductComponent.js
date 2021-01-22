@@ -1,15 +1,17 @@
 import React, { Component } from 'react'
 import { Dropdown, Form, Button } from 'react-bootstrap'
+import ProductService from '../Service/ProductService'
 
 class AddProductComponent extends Component {
 
   constructor(props) {
     super(props)
     this.state = {
-      itemToAdd: "Rod",
+      itemToAdd: "ROD",
       name: "",
       quantity: 1,
-      price: 1
+      price: 1,
+      description:""
     };
 
     this.handleDropdownChange = this.handleDropdownChange.bind(this);
@@ -28,11 +30,17 @@ class AddProductComponent extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const { itemToAdd, name, quantity, price } = this.state;
+    const { itemToAdd, name, quantity, price, description } = this.state;
+    console.log("odas")
     console.log(itemToAdd);
     console.log(name);
     console.log(quantity);
     console.log(price);
+    console.log(description);
+    ProductService.addNewProduct(name,quantity,price,description,itemToAdd).then(res=>{
+      alert(res.data);
+      
+    })
 
 
   }
@@ -78,9 +86,9 @@ class AddProductComponent extends Component {
           </Dropdown.Toggle>
 
           <Dropdown.Menu name="itemToAdd" value={this.state.itemToAdd}  >
-            <Dropdown.Item name="rod" onClick={this.handleDropdownChange} value="Rod" >Add new rod</Dropdown.Item>
-            <Dropdown.Item name="reel" value="Reel" onClick={this.handleDropdownChange}>Add new reel</Dropdown.Item>
-            <Dropdown.Item name="hook" value="Hook" onClick={this.handleDropdownChange}>Add new line</Dropdown.Item>
+            <Dropdown.Item name="rod" onClick={this.handleDropdownChange} value="ROD" >Add new rod</Dropdown.Item>
+            <Dropdown.Item name="reel" value="REEL" onClick={this.handleDropdownChange}>Add new reel</Dropdown.Item>
+            <Dropdown.Item name="hook" value="HOOK" onClick={this.handleDropdownChange}>Add new line</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
 
@@ -97,6 +105,11 @@ class AddProductComponent extends Component {
         <Form.Group controlId="formBasicPrice">
           <Form.Label>Price</Form.Label>
           <Form.Control type="number" placeholder="Price" name="price" value={this.state.price} onChange={this.handleChange} />
+        </Form.Group>
+
+        <Form.Group controlId="formBasicName">
+          <Form.Label>Name</Form.Label>
+          <Form.Control type="text" placeholder="Description" name="description" value={this.state.description} onChange={this.handleChange} />
         </Form.Group>
 
         <Button variant="primary" type="submit" onClick={this.handleSubmit}>

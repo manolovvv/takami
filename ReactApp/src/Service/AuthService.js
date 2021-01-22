@@ -22,7 +22,7 @@ class AuthService{
             email:email,
             firstName:firstName,
             familyName:familyName,
-            address:address
+            adress:address
         } );
         
     }

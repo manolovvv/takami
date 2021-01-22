@@ -25,6 +25,18 @@ class ProductService{
          window.location.reload();
     }
 
+   async addNewProduct(name,quantity,price,description,productType){
+        return await axios.post(PRODUCT_API_BASE_URL,
+            {
+                amount: quantity,
+                price: price,
+                name: name,
+                productType: productType,
+                description: description
+            
+            },options);
+    }
+
 }
 
 

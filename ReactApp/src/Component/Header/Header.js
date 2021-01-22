@@ -20,7 +20,8 @@ class Header extends Component {
     <Nav className="mr-auto">
      {/* // <Nav.Link href="/home">Home</Nav.Link> */}
       <Nav.Link href="/aboutme">About me</Nav.Link>
-      <Nav.Link href="/contactme">Contact me</Nav.Link>
+      //<Nav.Link href="/contactme">Contact me</Nav.Link>
+      {role === "ROLE_ADMIN" ?<Nav.Link href="/addNewProduct">Add new product</Nav.Link>: null} 
       <NavDropdown title="Categories" id="basic-nav-dropdown">
         <NavDropdown.Item href="/products/rods">Rods</NavDropdown.Item>
         <NavDropdown.Item href="/products/reels">Reels</NavDropdown.Item>

@@ -1,7 +1,7 @@
 
 
 export function addToCart (productId,quantity){
-    let allProducts = JSON.parse(localStorage.getItem("allProducts"));
+   
    
     let cartItems = [];
     if(JSON.parse(sessionStorage.getItem("cart")) ==null){
@@ -93,7 +93,7 @@ export function deleteCart(){
 
 export async function deleteProductFromCart(productId){
     let cartItems = JSON.parse(sessionStorage.getItem('cart'));
-  
+  console.log("Dasdas");
     console.log(sessionStorage.getItem('cart'));
     //console.log("delete");
     //console.log(cartItems);
@@ -108,9 +108,9 @@ export async function deleteProductFromCart(productId){
         
         if(cartItems[i].productId === productId){
           
-        cartItems = cartItems.splice(i,1);
-        //console.log("sled");
-        //console.log(JSON.stringify(cartItems));
+         cartItems.splice(i,1);
+        console.log("sled");
+        console.log(JSON.stringify(cartItems));
         sessionStorage.setItem('cart',JSON.stringify(cartItems))
 
         }

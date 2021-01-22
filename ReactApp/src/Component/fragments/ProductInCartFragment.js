@@ -11,7 +11,7 @@ import * as CartFunctions from '../../CartFunctions';
   
      return(
      <div className = "productInCart">
-         <h3>Name: {props.product.name} / Quantity: {props.product.quantity}*{props.product.price}  = {props.product.quantity * props.product.price}</h3>
+         <h3>Name: {props.product.name} / Quantity: {props.product.quantity}*{props.product.price}  = {parseFloat(props.product.quantity * props.product.price).toFixed(2)}</h3>
          <Button variant="danger" onClick = {()=>cartFunctions.deleteProductFromCart(props.product.id)}>Delete item from cart</Button>
      
      </div>

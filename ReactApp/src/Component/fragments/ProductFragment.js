@@ -1,9 +1,6 @@
 import React from 'react'
 import { Card, Button } from 'react-bootstrap'
-import * as cartFunctions from '../../CartFunctions'
 import ProductService from '../../Service/ProductService'
-import {Link} from 'react-router-dom'
-import { Redirect, Route, useHistory,withRouter } from 'react-router-dom'
 
 
 const ProductFragment = (props) => {

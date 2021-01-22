@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ProductService from '../Service/ProductService'
-import { Card, Button, Container, Row, Col } from 'react-bootstrap'
+import {  Container, Row, Col } from 'react-bootstrap'
 import { options } from '../constants/constants'
 import "./ProductListComponent.css"
 import ProductInList from "./fragments/ProductFragment"
@@ -17,15 +17,15 @@ class ProductListComponent extends Component {
 
 
 
-    componentWillMount() {
+   async componentDidMount() {
         
-        ProductService.getProducts(options).then((res) => {
+       await ProductService.getProducts(options).then((res) => {
             localStorage.setItem("allProducts", JSON.stringify(res.data));
             
           })
 
 
-        let allProducts = JSON.parse(localStorage.getItem("allProducts"));
+        let allProducts = await JSON.parse(localStorage.getItem("allProducts"));
         console.log(this.props.productType);
         let allProductsToShow
         if(sessionStorage.getItem('role') ==="ROLE_ADMIN"){
