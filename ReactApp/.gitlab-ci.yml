@@ -1,0 +1,10 @@
+stages:
+  - test
+
+test:
+  stage: test
+  script:
+    - npx cypress run
+
+after_script:
+    - echo "End CI"

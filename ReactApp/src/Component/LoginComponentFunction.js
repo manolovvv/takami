@@ -7,9 +7,27 @@ const LoginComponent =(props)=> {
 
     const[username,setUsername] = useState("");
     const[password,setPassword] = useState("");
-   
+    // constructor(props) {
+    //     super(props)
+    //     this.state = {
+    //         username: "",
+    //         password: ""
+
+    //     };
+
+    //     this.handleSubmit = this.handleSubmit.bind(this);
+    //     this.handleChange = this.handleChange.bind(this);
+
+    // };
+
+    // this.handleSubmit = this.handleSubmit.bind(this);
+    // this.handleChange = this.handleChange.bind(this);
+
     const handleChange = event =>{
- 
+        // this.setState({
+        //     [event.target.name]: event.target.value
+        // });
+        //console.log(event.target.name);
         if(event.target.name==="username"){
             setUsername(event.target.value);
             console.log(username);
@@ -24,7 +42,7 @@ const LoginComponent =(props)=> {
         console.log(5);
         console.log("zastho");
         AuthService.login(username, password).then((res) => {
-     
+            //sessionStorage.clear();
             console.log(res);
             sessionStorage.setItem('JWTToken', res.data.jwt);
             console.log(sessionStorage.getItem('JWTToken'));
@@ -36,6 +54,8 @@ const LoginComponent =(props)=> {
 
         })
         window.location.href = "/products"
+       // window.location.reload();
+        console.log(5);
        
         
 
