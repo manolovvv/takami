@@ -1,6 +1,6 @@
 stages:
-    -dockerizeSpring
-    -dockerizeReact
+    - dockerizeSpring
+    - dockerizeReact
 
 dockerizeSpring:
     stage: dockerizeSpring
