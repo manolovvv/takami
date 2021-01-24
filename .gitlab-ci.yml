@@ -5,8 +5,8 @@ stages:
 dockerizeSpring:
     stage: dockerizeSpring
     script: 
-        - mvn clean install
         - "cd ./JavaSpringApp"
+        - mvn clean install
         - "docker build -t takami ."
         - "docker restart mysql-takami"
         - "docker rmi takami"
