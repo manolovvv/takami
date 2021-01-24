@@ -1,14 +1,24 @@
 stages:
-    -dockerizeSpring
-    -dockerizeReact
+    - dockerizeSpring
+    - dockerizeReact
 
 dockerizeSpring:
     stage: dockerizeSpring
     script: 
-        - cd ./JavaSpringApp
-        - docker build -t takami .
-        - docker restart mysql-takami
-        - docker rmi takami
-        - docker stop takami
-        - docker rm takami
-        - docker run -p 8080:8080 --name takami --link mysql-takami -d takami
+        - "cd ./JavaSpringApp"
+        - mvn clean install
+        - "docker rm takami"
+        - "docker rmi takami"
+        - "docker build -t takami ."
+        - "docker restart mysql-takami"
+        - "docker run -p 8080:8080 --name takami --link mysql-takami -d takami"
+        - "docker start takami"
+        - "docker logs takami"
+        - "docker logs mysql-takami"
+
+dockerizeReact:
+    stage: dockerizeReact
+    script: 
+        -ls
+        
+        
