@@ -20,7 +20,7 @@ dockerizeSpring:
 dockerizeReact:
     stage: dockerizeReact
     script: 
-        - "cd ../ReactApp"
+        - "cd ./ReactApp"
         - "docker stop takamireact"
         - "docker rm takamireact"
         - "docker rmi takamireact"
