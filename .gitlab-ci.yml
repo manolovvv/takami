@@ -5,10 +5,10 @@ stages:
 dockerizeSpring:
     stage: dockerizeSpring
     script: 
-        - cd ./JavaSpringApp
-        - docker build -t takami .
-        - docker restart mysql-takami
-        - docker rmi takami
-        - docker stop takami
-        - docker rm takami
-        - docker run -p 8080:8080 --name takami --link mysql-takami -d takami
+        - "cd ./JavaSpringApp"
+        - "docker build -t takami ."
+        - "docker restart mysql-takami"
+        - "docker rmi takami"
+        - "docker stop takami"
+        - "docker rm takami"
+        - "docker run -p 8080:8080 --name takami --link mysql-takami -d takami"
