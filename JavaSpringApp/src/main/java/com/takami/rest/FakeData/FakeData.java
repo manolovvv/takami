@@ -53,16 +53,6 @@ public class FakeData implements CommandLineRunner {
         rod1.setDescription("Good rod/Nice price");
         productRepository.save(rod1);
 
-        Product rod2 = new Product();
-        rod2.setAmount(1);
-        rod2.setName("Feeder rod2");
-        rod2.setPathToImage("<Image>");
-        rod2.setAvailable(true);
-        rod2.setPrice(40);
-        rod2.setProductType(ProductType.ROD);
-        rod2.setDescription("Good rod/Nice price");
-        productRepository.save(rod2);
-
         Product reel1 = new Product();
         reel1.setName("Match reel");
         reel1.setAmount(3);

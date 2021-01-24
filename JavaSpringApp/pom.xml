@@ -16,7 +16,6 @@
 
     <properties>
         <java.version>15</java.version>
-        
     </properties>
 
     <dependencies>
@@ -70,11 +69,6 @@
             <artifactId>velocity-tools</artifactId>
             <version>2.0</version>
         </dependency>
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <scope>test</scope>
-        </dependency>
 
         <dependency>
             <groupId>junit</groupId>
@@ -83,38 +77,24 @@
         </dependency>
     </dependencies>
 
-
     <build>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <fork>true</fork>
-                    <mainClass>com.takami.rest.TakamiApplication</mainClass>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <source>14</source>
                     <target>14</target>
-
                 </configuration>
             </plugin>
         </plugins>
         <finalName>takami</finalName>
     </build>
-<packaging>jar</packaging>
+
     <repositories>
         <repository>
             <id>spring-milestones</id>

@@ -1,7 +1,6 @@
 package com.takami.rest.Controllers;
 
 
-import com.takami.rest.Requests.RequestSignUp;
 import com.takami.rest.jwt.JwtResponse;
 import com.takami.rest.jwt.JwtUtils;
 import com.takami.rest.jwt.LoginRequest;
@@ -62,7 +61,7 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<?> registerUser( @RequestBody /*User*/ RequestSignUp signUpRequest) {
+    public ResponseEntity<?> registerUser( @RequestBody User signUpRequest) {
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
             return ResponseEntity
                     .badRequest()
