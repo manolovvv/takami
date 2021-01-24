@@ -10,5 +10,4 @@ dockerizeSpring:
         - "docker rmi takami"
         - "docker build -t takami ."
         - "docker restart mysql-takami"
-        - "docker rmi takami"
         
