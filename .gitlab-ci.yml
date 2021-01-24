@@ -6,7 +6,8 @@ dockerizeSpring:
     stage: dockerizeSpring
     script: 
         - "cd ./JavaSpringApp"
-        - mvn clean install
+        - "mvn clean install"
+        - "docker stop takami"
         - "docker rm takami"
         - "docker rmi takami"
         - "docker build -t takami ."
