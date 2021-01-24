@@ -13,6 +13,12 @@ dockerizeSpring:
         - "docker restart mysql-takami"
         - "docker run -p 8080:8080 --name takami --link mysql-takami -d takami"
         - "docker start takami"
-        - "docker logs mysql-takami"
         - "docker logs takami"
+        - "docker logs mysql-takami"
+
+dockerizeReact:
+    stage: dockerizeReact
+    script: 
+        -ls
+        
         
