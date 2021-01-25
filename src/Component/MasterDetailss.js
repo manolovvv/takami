@@ -24,7 +24,6 @@ const MasterDetails = (props) => {
     console.log(id);
 
     useEffect(() => {
-        //let allProducts = JSON.parse(localStorage.getItem('allProducts'));
         ProductService.getProduct(id).then((res) => {
             console.log(res.data);
             let item = res.data;
@@ -36,7 +35,6 @@ const MasterDetails = (props) => {
 
         })
 
-        // console.log(product);
 
     }, [id]);
 
