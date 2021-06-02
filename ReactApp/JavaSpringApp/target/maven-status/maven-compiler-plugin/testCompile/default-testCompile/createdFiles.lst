@@ -1,7 +1,0 @@
-com\takami\rest\model\RequestTest.class
-com\takami\rest\model\UserTest.class
-com\takami\rest\IntegrationTesting\UserRepositoryTest.class
-com\takami\rest\model\OrderItemTest.class
-com\takami\rest\model\ProductTest.class
-com\takami\rest\IntegrationTesting\ProductControllerTest.class
-com\takami\rest\TakamiApplicationTests.class
