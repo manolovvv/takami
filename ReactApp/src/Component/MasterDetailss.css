@@ -1,0 +1,35 @@
+.product_desc{
+        margin: 30px auto;
+        display: table;
+        border: 3px dotted black;
+        padding: 3rem 8rem 3rem 1.5rem;
+        border: 1px 2px;
+}
+
+.product{
+    text-align:center;
+}
+
+@media only screen and (max-width: 992px) {
+    .product{
+        margin-top: 4rem;
+    }
+  }
+
+.product_img{
+    text-align: center;
+}
+.product_quantity{
+    display:inline
+    
+    
+}
+
+.product_price{
+    padding-left: 4rem;
+    display: inline;
+}
+
+.btnAddToCart{
+    
+}

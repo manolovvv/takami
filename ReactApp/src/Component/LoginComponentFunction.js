@@ -1,5 +1,9 @@
 import React, { Component, useEffect, useState } from 'react'
 import { Form, Button } from 'react-bootstrap'
+<<<<<<< HEAD
+//import './LoginComponent.jsx'
+=======
+>>>>>>> a068b07ada307434a85d5a93ddb95cd57d2e5d5e
 
 import AuthService from '../Service/AuthService'
 
@@ -69,6 +73,25 @@ const LoginComponent =(props)=> {
 
 
     
+<<<<<<< HEAD
+
+        return (
+//             <Form onSubmit={handleSubmit}>
+//                 <Form.Group controlId="formBasicUsername">
+//                     <Form.Label>Username</Form.Label>
+//                     <Form.Control type="text" placeholder="Enter Username" name="username" value={username} onChange={handleChange} />
+//                 </Form.Group>
+
+//                 <Form.Group controlId="formBasicPassword">
+//                     <Form.Label>Password</Form.Label>
+//                     <Form.Control type="password" placeholder="Password" name="password" value={password} onChange={handleChange} />
+//                 </Form.Group>
+//                 <Button variant="primary" type="submit" /*onClick={handleSubmit}*/>
+//                     Login
+//   </Button>
+//             </Form>
+<h1>opp</h1>
+=======
         return (
 
             <Form onSubmit={handleSubmit}>
@@ -86,6 +109,7 @@ const LoginComponent =(props)=> {
   </Button>
             </Form>
 
+>>>>>>> a068b07ada307434a85d5a93ddb95cd57d2e5d5e
         )
 
     

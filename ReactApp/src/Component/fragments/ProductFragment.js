@@ -6,7 +6,11 @@ import ProductService from '../../Service/ProductService'
 const ProductFragment = (props) => {
     return (
         <Card style={{ width: '15rem' }} key={props.id}>
+<<<<<<< HEAD
+            <Card.Img variant="top" src="https://via.placeholder.com/150" />
+=======
             <Card.Img variant="top" src="holder.js/100px180" />
+>>>>>>> a068b07ada307434a85d5a93ddb95cd57d2e5d5e
 
             <Card.Body>
                 <Card.Title>{props.name}</Card.Title>

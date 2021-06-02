@@ -40,6 +40,17 @@ class ProductListComponent extends Component {
     
 
     render() {
+<<<<<<< HEAD
+        console.log("DASDASDASDASDASDADS")
+        return (
+            <div className="wrapper">
+                <Container>
+                    <Row className="justify-content-center mt-5">
+                        {
+                            this.state.products.map(
+                                (product, index) => <div key = {index}><Col  key={product.id} className = "mt-5"> {ProductInList(product)}</Col></div>
+ 
+=======
         return (
             <div className="wrapper">
                 <Container>
@@ -54,6 +65,7 @@ class ProductListComponent extends Component {
 
                                     )
                                 }
+>>>>>>> a068b07ada307434a85d5a93ddb95cd57d2e5d5e
                             )}
                     </Row>
                 </Container>
