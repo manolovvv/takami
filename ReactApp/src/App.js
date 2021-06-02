@@ -1,23 +1,14 @@
 import React from 'react';
 import './App.css';
 import Header from './Component/Header/Header2'
-<<<<<<< HEAD
 import LoginComponent from './Component/LoginComponent.jsx'
-=======
-import LoginComponent from './Component/LoginComponent'
->>>>>>> a068b07ada307434a85d5a93ddb95cd57d2e5d5e
 import AllProductsComponent from './Component/allProductsComponent';
 import {BrowserRouter as Router,Route} from 'react-router-dom'
 import ProductListComponent from './Component/ProductListComponent';
 import AddProductComponent from "./Component/AddProductComponent";
 import AboutMeComponent from './Component/AboutMeComponent'
-<<<<<<< HEAD
 import CartComponent from './Component/CartComponent.jsx'
 import RegisterComponent from './Component/RegisterComponent.jsx'
-=======
-import CartComponent from './Component/CartComponent'
-import RegisterComponent from './Component/RegisterComponent'
->>>>>>> a068b07ada307434a85d5a93ddb95cd57d2e5d5e
 import MasterDetails from './Component/MasterDetailss'
 
 function App() {

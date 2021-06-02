@@ -2,11 +2,7 @@
 
 export function addToCart (productId,quantity){
    
-<<<<<<< HEAD
     
-=======
-   
->>>>>>> a068b07ada307434a85d5a93ddb95cd57d2e5d5e
     let cartItems = [];
     if(JSON.parse(sessionStorage.getItem("cart")) ==null){
         sessionStorage.setItem("cart",JSON.stringify({productId, quantity}));
@@ -14,10 +10,7 @@ export function addToCart (productId,quantity){
 
     }
     else if(!Array.isArray(JSON.parse(sessionStorage.getItem("cart")))){
-<<<<<<< HEAD
         console.log("ARRAYYYYYYY")
-=======
->>>>>>> a068b07ada307434a85d5a93ddb95cd57d2e5d5e
         let itemInCart = JSON.parse(sessionStorage.getItem("cart"));
         console.log(itemInCart);
         if(itemInCart.productId ===productId){
@@ -32,7 +25,6 @@ export function addToCart (productId,quantity){
     }
     else{
         console.log(3);
-<<<<<<< HEAD
         cartItems =  JSON.parse(sessionStorage.getItem("cart"));
         sessionStorage.removeItem('cart')
         let existsInCart = false;
@@ -44,17 +36,6 @@ export function addToCart (productId,quantity){
             console.log(cartItems[i])
             if(cartItems[i].productId === productId){
                 console.log("QUANTITY " +cartItems[i].quantity)
-=======
-        cartItems = JSON.parse(sessionStorage.getItem("cart"));
-        
-        let existsInCart = false;
-        //cartItems.push({productId,quantity});
-        console.log(cartItems.length);
-        //sessionStorage.setItem("cart",JSON.stringify(cartItems));
-        //console.log(cartItems);
-        for(let i=0;i<cartItems.length;i++){
-            if(cartItems[i].productId === productId){
->>>>>>> a068b07ada307434a85d5a93ddb95cd57d2e5d5e
                 cartItems[i].quantity+= quantity;
                 existsInCart = true;
                 sessionStorage.setItem("cart",JSON.stringify(cartItems));
@@ -142,7 +123,6 @@ export async function deleteProductFromCart(productId){
     window.location.reload();
 }
 
-<<<<<<< HEAD
 export async function subtotalCart(){
     let cartItems = JSON.parse(sessionStorage.getItem('cart'));
     let allProducts = JSON.parse(localStorage.getItem('allProducts'));
@@ -173,5 +153,3 @@ export async function subtotalCart(){
    
 }
 
-=======
->>>>>>> a068b07ada307434a85d5a93ddb95cd57d2e5d5e

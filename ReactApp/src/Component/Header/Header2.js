@@ -27,15 +27,9 @@ const Header =(props)=> {
       {/* <Nav.Link href="/contactme">Contact me</Nav.Link> */}
      {role === "ROLE_ADMIN" ?<Nav.Link href="/addNewProduct">Add new product</Nav.Link>: null} 
       <NavDropdown title="Categories" id="basic-nav-dropdown">
-<<<<<<< HEAD
-        <NavDropdown.Item href="/products/rods" className="text-center">Rods</NavDropdown.Item>
+       <NavDropdown.Item href="/products/rods" className="text-center">Rods</NavDropdown.Item>
         <NavDropdown.Item href="/products/reels" className="text-center">Reels</NavDropdown.Item>
         <NavDropdown.Item href="/products/hooks" className="text-center">Hooks</NavDropdown.Item>
-=======
-        <NavDropdown.Item href="/products/rods">Rods</NavDropdown.Item>
-        <NavDropdown.Item href="/products/reels">Reels</NavDropdown.Item>
-        <NavDropdown.Item href="/products/hooks">Hooks</NavDropdown.Item>
->>>>>>> a068b07ada307434a85d5a93ddb95cd57d2e5d5e
       </NavDropdown>
     </Nav>
     {sessionStorage.getItem("JWTToken")?<LogoutButtonInHeader/>:<LoginAndRegisterButtonsInHeader/>}

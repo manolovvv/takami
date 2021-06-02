@@ -63,31 +63,10 @@ class ProductListComponent extends Component {
         return (
             <div className="wrapper">
                 <Container>
-<<<<<<< HEAD
-                    <Row className="justify-content-center mt-5">
+                  <Row className="justify-content-center mt-5">
                         {
                             this.state.products.map((product, index) => <div key={index}><Col className="mt-5" key={product.id}> {ProductInList(product)}</Col></div>)
                         }
-=======
-                    <Row>
-                        {
-                            this.state.products.map(
-                                (product, index) => {
-                                    // if((index+1)%3 ===0){
-                                    //     return (
-                                           
-                                    //         <Col sm key={product.id}> {ProductInList(product)}</Col>
-                                          
-                                    //     )
-                                    // }
-                                    return (
-
-                                        <Col sm key={product.id}> {ProductInList(product)}</Col>
-
-                                    )
-                                }
-                            )}
->>>>>>> a068b07ada307434a85d5a93ddb95cd57d2e5d5e
                     </Row>
                     {/* {this.ListProductCards(this.state.products)} */}
                 </Container>
