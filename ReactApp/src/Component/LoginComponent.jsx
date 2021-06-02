@@ -1,7 +1,5 @@
-import React, { Component } from 'react'
-import { Form, Button } from 'react-bootstrap'
+import React from 'react'
 import { withRouter } from 'react-router-dom'
-import AuthService from '../Service/AuthService'
 import LoginForm from './fragments/LoginForm.jsx'
 import LoginRight from './fragments/LoginRight.jsx'
 import { Row, Col } from 'react-bootstrap'

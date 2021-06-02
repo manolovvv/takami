@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Button, Container, Row, Col } from 'react-bootstrap';
 import ProductInCartFragment from './fragments/ProductInCartFragment'
 import RequestService from '../Service/RequestService'
 import ProductService from '../Service/ProductService'
@@ -39,7 +38,7 @@ class CartComponent extends Component {
             sessionStorage.setItem('cart', JSON.stringify(this.state.productsInCart));
 
 
-            await this.state.productsInCart.map(
+            await this.state.productsInCart.forEach(
                 (product) => {
                     if(!typeof product ==='undefined'){
                     for (let i = 0; allProducts.length; i++) {
@@ -161,7 +160,7 @@ class CartComponent extends Component {
   
 
   {
-                        this.state.productsInCart.map(
+                        this.state.productsInCart.forEach(
                             (product, index) => {
                                 if (product !== null) {
                                     let q = product.quantity;

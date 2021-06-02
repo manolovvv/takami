@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams, Redirect } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { Button, Container, Row, Col, Image } from 'react-bootstrap'
 import ProductService from '../Service/ProductService'
 import * as CartFunctions from '../CartFunctions'
@@ -18,7 +18,7 @@ const MasterDetails = (props) => {
         productType: "ROD"
     });
 
-    const[quantity, setQuantity] = useState(0);
+
 
     const { id } = useParams();
 

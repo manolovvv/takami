@@ -1,6 +1,5 @@
-import React, { Component } from 'react'
-import {Form,Button,Row,Col} from 'react-bootstrap'
-import AuthService from '../Service/AuthService'
+import React from 'react'
+import {Row,Col} from 'react-bootstrap'
 import { withRouter } from 'react-router-dom'
 import RegisterForm from './fragments/RegisterForm.jsx'
 import RegisterRight from './fragments/RegisterRight.jsx'

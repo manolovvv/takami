@@ -1,23 +1,16 @@
 import React from 'react'
-import { Card, Button } from 'react-bootstrap'
 import * as cartFunctions from '../../CartFunctions'
-import ProductListComponent from '../ProductListComponent'
 import './ProductInCartFragment.css'
-import * as CartFunctions from '../../CartFunctions';
 
 
 
   const ProductInCartFragment = (props)=>{
   
      return(
-    //  <div className = "productInCart" id={props.product.id}>
-    //      <h3>Name: {props.product.name} / Quantity: {props.product.quantity}*{props.product.price}  = {parseFloat(props.product.quantity * props.product.price).toFixed(2)}</h3>
-    //      <Button variant="danger" onClick = {()=>cartFunctions.deleteProductFromCart(props.product.id)}>Delete item from cart</Button>
-     
-    //  </div>
+ 
     <div className="product" key={props.product.id}>
     <div className="product-image">
-      <img src="https://via.placeholder.com/100"/>
+      <img src="https://via.placeholder.com/100" alt="Placeholder"/>
     </div>
     <div className="product-details">
       <div className="product-title">{props.product.name}</div>
